@@ -136,7 +136,7 @@ button, input, select { font: inherit; color: inherit; }
 .layout {
   position: relative;
   z-index: 1;
-  width: min(1360px, 100% - 3rem);
+  width: min(1320px, 100% - 3rem);
   margin: 1.55rem auto 3.5rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -147,9 +147,11 @@ button, input, select { font: inherit; color: inherit; }
 /* ------------------------------------------------------------- filtros -- */
 .lateral {
   display: grid;
-  grid-template-columns: minmax(360px, 1.55fr) minmax(280px, .9fr);
+  grid-template-columns: minmax(320px, 420px) minmax(260px, 340px);
   gap: 1rem;
   align-items: start;
+  justify-content: start;
+  max-width: 780px;
 }
 .lateral__bloco {
   background: var(--branco);
@@ -204,7 +206,7 @@ select.entrada {
 
 .caixa-empresas {
   margin-top: .6rem;
-  max-height: 220px;
+  max-height: 188px;
   overflow: auto;
   border: 1px solid var(--linha);
   border-radius: 10px;
@@ -327,7 +329,7 @@ select.entrada {
 .conteudo {
   min-width: 0;
   display: grid;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 .abas {
   display: flex;
@@ -340,6 +342,8 @@ select.entrada {
   border-radius: var(--raio);
   box-shadow: var(--sombra);
   backdrop-filter: blur(6px);
+  position: relative;
+  z-index: 2;
 }
 .aba {
   border: 0;
@@ -362,7 +366,11 @@ select.entrada {
 }
 .aba:focus-visible { outline: 2px solid var(--azul-medio); outline-offset: 3px; border-radius: 4px; }
 
-.painel { animation: subir .42s cubic-bezier(.2, .7, .25, 1) both; }
+.painel {
+  animation: subir .42s cubic-bezier(.2, .7, .25, 1) both;
+  position: relative;
+  z-index: 1;
+}
 .aviso {
   padding: .6rem .8rem;
   border-left: 3px solid var(--magenta);
@@ -576,8 +584,9 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
 /* ------------------------------------------------------------ responsivo */
 @media (max-width: 1180px) {
   .lateral {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(300px, 1fr) minmax(240px, 300px);
     gap: 1rem;
+    max-width: 100%;
   }
   .abas {
     gap: .25rem .9rem;
@@ -595,6 +604,7 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
   }
   .lateral {
     grid-template-columns: minmax(0, 1fr);
+    max-width: none;
   }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grade--2 { grid-template-columns: minmax(0, 1fr); }
