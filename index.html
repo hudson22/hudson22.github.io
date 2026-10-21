@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prêmios e Sinistros · Mercado de Seguros — SUSEP/SES</title>
+<meta name="description" content="Painel estático de prêmios, sinistros, sinistralidade, concentração de mercado e resseguro do mercado brasileiro de seguros, a partir do relatório Premios e Sinistros (id=54) da SUSEP/SES.">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo__interno">
+    <p class="marca"><span class="marca__sigla">CNP</span><span class="marca__nome">Seguradora</span></p>
+    <h1 class="topo__titulo">Prêmios e Sinistros &mdash; Mercado de Seguros</h1>
+    <p class="topo__fonte" id="topo-fonte">Fonte: SUSEP / SES &middot; relatório Prêmios e Sinistros (id=54)</p>
+    <dl class="topo__numeros" id="topo-numeros"></dl>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="lateral">
+    <div class="lateral__bloco">
+      <h2 class="lateral__titulo">Filtros</h2>
+      <label class="rotulo" for="busca-empresa">Filtrar por empresa</label>
+      <input id="busca-empresa" class="entrada" type="search" placeholder="Nome ou código SUSEP" autocomplete="off">
+      <div class="caixa-empresas" id="lista-empresas" role="group" aria-label="Empresas"></div>
+      <div class="chips" id="chips-empresas"></div>
+      <p class="ajuda" id="ajuda-empresas">Seleção vazia = mercado inteiro.</p>
+      <button class="botao botao--fantasma" id="limpar-empresas" type="button" hidden>Limpar seleção</button>
+    </div>
+
+    <div class="lateral__bloco">
+      <h2 class="lateral__titulo">Base de dados</h2>
+      <div class="ficha" id="ficha-base"></div>
+      <details class="detalhes">
+        <summary>Como atualizar</summary>
+        <p>Os arquivos <code>dados/*.json</code> deste repositório são gerados pelo pipeline local:</p>
+        <pre><code>python -m src.coleta --ini 202601 --fim atual
+python -m src.exportar_web --destino site/dados</code></pre>
+        <p>Depois é só commitar a pasta <code>dados/</code> atualizada.</p>
+      </details>
+    </div>
+  </aside>
+
+  <main class="conteudo">
+    <nav class="abas" role="tablist" aria-label="Blocos de indicadores">
+      <button class="aba" role="tab" id="aba-ramos" data-aba="ramos" aria-selected="true" aria-controls="painel-ramos">Prêmios e sinistralidade por ramo</button>
+      <button class="aba" role="tab" id="aba-ranking" data-aba="ranking" aria-selected="false" aria-controls="painel-ranking" tabindex="-1">Ranking e concentração</button>
+      <button class="aba" role="tab" id="aba-evolucao" data-aba="evolucao" aria-selected="false" aria-controls="painel-evolucao" tabindex="-1">Evolução e sazonalidade</button>
+      <button class="aba" role="tab" id="aba-estrutura" data-aba="estrutura" aria-selected="false" aria-controls="painel-estrutura" tabindex="-1">Resseguro e previdência/VGBL</button>
+    </nav>
+
+    <p class="aviso" id="aviso-filtro" hidden></p>
+
+    <!-- 1. ramos -->
+    <section class="painel" id="painel-ramos" role="tabpanel" aria-labelledby="aba-ramos">
+      <div class="controles">
+        <div class="controle">
+          <label class="rotulo" for="comp-ramos">Competência</label>
+          <select class="entrada" id="comp-ramos"></select>
+        </div>
+        <div class="controle controle--largo">
+          <label class="rotulo" for="top-ramos">Ramos no gráfico: <output id="top-ramos-saida">15</output></label>
+          <input class="faixa" id="top-ramos" type="range" min="5" max="30" value="15" step="1">
+        </div>
+      </div>
+
+      <div class="kpis">
+        <article class="kpi"><p class="kpi__rotulo">Prêmio direto</p><p class="kpi__valor" id="k-ramos-premio">–</p></article>
+        <article class="kpi"><p class="kpi__rotulo">Sinistro ocorrido</p><p class="kpi__valor" id="k-ramos-sinistro">–</p></article>
+        <article class="kpi kpi--destaque"><p class="kpi__rotulo">Sinistralidade</p><p class="kpi__valor" id="k-ramos-sinistralidade">–</p></article>
+        <article class="kpi"><p class="kpi__rotulo">Ramos com movimento</p><p class="kpi__valor" id="k-ramos-ativos">–</p></article>
+      </div>
+
+      <div class="grade grade--2">
+        <figure class="cartao">
+          <figcaption class="cartao__titulo" id="t-ramos-mix">Prêmio e sinistro por ramo</figcaption>
+          <div class="grafico" id="g-ramos-mix"></div>
+        </figure>
+        <figure class="cartao">
+          <figcaption class="cartao__titulo">Sinistralidade &times; porte do ramo</figcaption>
+          <div class="grafico" id="g-ramos-dispersao"></div>
+          <p class="nota">Cada bolha é um ramo: eixo X é o prêmio direto acumulado, eixo Y a sinistralidade. O tamanho acompanha o prêmio.</p>
+        </figure>
+      </div>
+
+      <figure class="cartao">
+        <figcaption class="cartao__titulo">Ramos com maior sinistralidade</figcaption>
+        <div class="grafico" id="g-ramos-sinistralidade"></div>
+      </figure>
+
+      <section class="bloco-tabela">
+        <header class="bloco-tabela__topo">
+          <h2 class="secao">Detalhe por ramo</h2>
+          <span class="contador" id="c-ramos"></span>
+        </header>
+        <div class="rolagem" id="tabela-ramos"></div>
+      </section>
+    </section>
+
+    <!-- 2. ranking -->
+    <section class="painel" id="painel-ranking" role="tabpanel" aria-labelledby="aba-ranking" hidden>
+      <div class="controles">
+        <div class="controle">
+          <span class="rotulo">Escopo do ranking</span>
+          <div class="segmentado" id="escopo-ranking" role="radiogroup" aria-label="Escopo do ranking">
+            <button class="segmento" role="radio" aria-checked="true" data-escopo="mercado">Mercado total</button>
+            <button class="segmento" role="radio" aria-checked="false" data-escopo="ramo">Por ramo</button>
+          </div>
+        </div>
+        <div class="controle" id="controle-ramo-ranking" hidden>
+          <label class="rotulo" for="ramo-ranking">Ramo</label>
+          <select class="entrada" id="ramo-ranking"></select>
+        </div>
+        <div class="controle">
+          <label class="rotulo" for="comp-ranking">Competência</label>
+          <select class="entrada" id="comp-ranking"></select>
+        </div>
+        <div class="controle controle--largo">
+          <label class="rotulo" for="top-ranking">Empresas no gráfico: <output id="top-ranking-saida">15</output></label>
+          <input class="faixa" id="top-ranking" type="range" min="5" max="30" value="15" step="1">
+        </div>
+      </div>
+
+      <div class="kpis">
+        <article class="kpi"><p class="kpi__rotulo">Empresas no recorte</p><p class="kpi__valor" id="k-rank-empresas">–</p></article>
+        <article class="kpi"><p class="kpi__rotulo">HHI</p><p class="kpi__valor" id="k-rank-hhi">–</p></article>
+        <article class="kpi kpi--destaque"><p class="kpi__rotulo">CR4</p><p class="kpi__valor" id="k-rank-cr4">–</p></article>
+        <article class="kpi kpi--destaque"><p class="kpi__rotulo">CR8</p><p class="kpi__valor" id="k-rank-cr8">–</p></article>
+      </div>
+
+      <div class="grade grade--2">
+        <figure class="cartao">
+          <figcaption class="cartao__titulo" id="t-rank-empresas">Empresas por prêmio direto</figcaption>
+          <div class="grafico" id="g-rank-empresas"></div>
+        </figure>
+        <figure class="cartao">
+          <figcaption class="cartao__titulo">Curva de concentração</figcaption>
+          <div class="grafico" id="g-rank-concentracao"></div>
+          <p class="nota">Participação acumulada das empresas ordenadas por prêmio. As linhas tracejadas marcam CR4 e CR8. O HHI resume a concentração: até 1.500 é competitivo, acima de 2.500 é concentrado.</p>
+        </figure>
+      </div>
+
+      <section class="bloco-tabela">
+        <header class="bloco-tabela__topo">
+          <h2 class="secao">Detalhe por empresa</h2>
+          <span class="contador" id="c-ranking"></span>
+        </header>
+        <div class="rolagem" id="tabela-ranking"></div>
+      </section>
+    </section>
+
+    <!-- 3. evolucao -->
+    <section class="painel" id="painel-evolucao" role="tabpanel" aria-labelledby="aba-evolucao" hidden>
+      <figure class="cartao">
+        <figcaption class="cartao__titulo">Evolução mensal do prêmio, sinistro e sinistralidade</figcaption>
+        <div class="grafico" id="g-evolucao"></div>
+      </figure>
+
+      <div class="grade grade--2">
+        <figure class="cartao">
+          <figcaption class="cartao__titulo">Variação do prêmio direto mês a mês</figcaption>
+          <div class="grafico" id="g-variacao"></div>
+        </figure>
+        <section class="bloco-tabela bloco-tabela--solto">
+          <header class="bloco-tabela__topo">
+            <h2 class="secao">Série mensal</h2>
+          </header>
+          <div class="rolagem" id="tabela-serie"></div>
+        </section>
+      </div>
+
+      <figure class="cartao">
+        <figcaption class="cartao__titulo">Prêmio direto mensal por ramo (R$ milhões)</figcaption>
+        <div class="grafico" id="g-sazonalidade"></div>
+        <p class="nota">Os doze ramos com maior prêmio no período. A leitura horizontal mostra a sazonalidade de cada ramo ao longo do ano.</p>
+      </figure>
+    </section>
+
+    <!-- 4. estrutura -->
+    <section class="painel" id="painel-estrutura" role="tabpanel" aria-labelledby="aba-estrutura" hidden>
+      <div class="controles">
+        <div class="controle">
+          <label class="rotulo" for="comp-estrutura">Competência</label>
+          <select class="entrada" id="comp-estrutura"></select>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <article class="kpi"><p class="kpi__rotulo">Prêmio ganho</p><p class="kpi__valor" id="k-est-premio">–</p></article>
+        <article class="kpi"><p class="kpi__rotulo">Despesa com resseguro</p><p class="kpi__valor" id="k-est-despesa">–</p></article>
+        <article class="kpi kpi--destaque"><p class="kpi__rotulo">Cedência</p><p class="kpi__valor" id="k-est-cedencia">–</p></article>
+        <article class="kpi kpi--destaque"><p class="kpi__rotulo">Recuperação com resseguro</p><p class="kpi__valor" id="k-est-recuperacao">–</p></article>
+      </div>
+
+      <div class="grade grade--2">
+        <figure class="cartao">
+          <figcaption class="cartao__titulo">Resseguro nos 15 maiores ramos</figcaption>
+          <div class="grafico" id="g-resseguro"></div>
+        </figure>
+        <figure class="cartao">
+          <figcaption class="cartao__titulo">Taxa de cedência de resseguro</figcaption>
+          <div class="grafico" id="g-cedencia"></div>
+        </figure>
+      </div>
+
+      <h2 class="secao secao--separada">Previdência / regime de capitalização e linhas especiais</h2>
+      <p class="nota nota--larga">O relatório id=54 não expõe provisões técnicas (PSL, IBNR, PPNG). Os indicadores abaixo cobrem o resseguro, o prêmio em regime de capitalização (previdência/VGBL) e as linhas especiais disponíveis no relatório.</p>
+
+      <div class="grade grade--2">
+        <figure class="cartao">
+          <figcaption class="cartao__titulo">Composição do prêmio emitido</figcaption>
+          <div class="grafico" id="g-donut"></div>
+          <p class="nota" id="nota-capitalizacao"></p>
+        </figure>
+        <figure class="cartao">
+          <figcaption class="cartao__titulo">Linhas especiais</figcaption>
+          <div class="grafico" id="g-especiais"></div>
+        </figure>
+      </div>
+
+      <details class="detalhes detalhes--tabela">
+        <summary>Métricas de resseguro por ramo</summary>
+        <div class="rolagem" id="tabela-resseguro"></div>
+      </details>
+    </section>
+
+    <footer class="rodape">
+      <p id="rodape-fonte">Fonte: SUSEP / SES — relatório Prêmios e Sinistros (id=54).</p>
+      <p id="rodape-geracao"></p>
+    </footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
