@@ -165,6 +165,28 @@
     rotulos: { codigo_empresa: l.codigo_empresa, nome_empresa: nomeEmpresa(l.codigo_empresa) }
   }));
 
+  const porEmpresaRamo = (linhas) => agrupar(linhas, (l) => ({
+    chave: `${l.codigo_empresa}|${l.codigo_ramo}`,
+    rotulos: {
+      codigo_empresa: l.codigo_empresa,
+      nome_empresa: nomeEmpresa(l.codigo_empresa),
+      codigo_ramo: l.codigo_ramo,
+      nome_ramo: nomeRamo(l.codigo_ramo)
+    }
+  }));
+
+  const porEmpresaCompetencia = (linhas) => agrupar(linhas, (l) => ({
+    chave: `${l.codigo_empresa}|${l.competencia}`,
+    rotulos: {
+      codigo_empresa: l.codigo_empresa,
+      nome_empresa: nomeEmpresa(l.codigo_empresa),
+      competencia: l.competencia
+    }
+  }));
+
+  const empresasSelecionadas = () => [...estado.empresas]
+    .sort((a, b) => nomeEmpresa(a).localeCompare(nomeEmpresa(b), 'pt-BR'));
+
   function comSinistralidade(linhas) {
     for (const linha of linhas) {
       const premio = Number(linha.premio_ganho || 0);
@@ -189,6 +211,14 @@
   function recortar(linhas, competencias) {
     const conjunto = new Set(competencias);
     return linhas.filter((l) => conjunto.has(String(l.competencia)));
+  }
+
+  function definirTituloGrafico(id, texto) {
+    const alvo = document.getElementById(id);
+    const titulo = alvo && alvo.previousElementSibling;
+    if (titulo && titulo.classList && titulo.classList.contains('cartao__titulo')) {
+      titulo.textContent = texto;
+    }
   }
 
   // --------------------------------------------------- seletor de mês ---- */
@@ -273,8 +303,9 @@
     const competencias = competenciasDe(fonte.linhas);
     estado.compRamos = preencherCompetencia('comp-ramos', competencias, estado.compRamos);
     const selecionadas = competenciasSelecionadas(estado.compRamos, competencias);
-
-    const base = comSinistralidade(porRamo(recortar(fonte.linhas, selecionadas)))
+    const linhasRecorte = recortar(fonte.linhas, selecionadas);
+    const compararEmpresas = fonte.cruzamento && estado.empresas.size > 1;
+    const base = comSinistralidade(porRamo(linhasRecorte))
       .sort((a, b) => b.premio_direto - a.premio_direto);
 
     const premio = base.reduce((s, l) => s + l.premio_direto, 0);
@@ -290,8 +321,111 @@
     const n = estado.topRamos;
     const topo = base.slice(0, n);
 
+    if (compararEmpresas) {
+      const empresas = empresasSelecionadas();
+      const baseEmpresaRamo = comSinistralidade(porEmpresaRamo(linhasRecorte))
+        .sort((a, b) => b.premio_direto - a.premio_direto);
+      const indiceEmpresaRamo = new Map(
+        baseEmpresaRamo.map((linha) => [`${linha.codigo_empresa}|${linha.codigo_ramo}`, linha])
+      );
+      const ramosTop = base.slice(0, Math.min(n, 10));
+      const baseEmpresa = comSinistralidade(porEmpresa(linhasRecorte))
+        .filter((l) => l.premio_direto > 0)
+        .sort((a, b) => b.premio_direto - a.premio_direto);
+
+      document.getElementById('t-ramos-mix').textContent =
+        `Comparativo dos principais ramos por empresa selecionada`;
+      definirTituloGrafico('g-ramos-dispersao', 'Empresas selecionadas: porte x sinistralidade');
+      definirTituloGrafico('g-ramos-sinistralidade', 'Sinistralidade por empresa selecionada');
+
+      desenhar('g-ramos-mix',
+        empresas.map((codigo) => ({
+          type: 'bar',
+          orientation: 'h',
+          name: nomeEmpresa(codigo),
+          x: ramosTop.map((ramo) => (indiceEmpresaRamo.get(`${codigo}|${ramo.codigo_ramo}`)?.premio_direto || 0) / 1e6),
+          y: ramosTop.map((ramo) => ramo.nome_ramo),
+          customdata: ramosTop.map((ramo) => [
+            fmt.moeda(indiceEmpresaRamo.get(`${codigo}|${ramo.codigo_ramo}`)?.premio_direto || 0)
+          ]),
+          hovertemplate: '<b>%{fullData.name}</b><br>%{y}<br>Prêmio direto: %{customdata[0]}<extra></extra>'
+        })),
+        {
+          barmode: 'group',
+          height: alturaBarras(ramosTop.length),
+          margin: { l: 6, r: 14, t: 10, b: 34 },
+          yaxis: Object.assign({}, EIXO, { autorange: 'reversed', tickfont: { size: 11, color: COR.cinza } }),
+          xaxis: Object.assign({}, EIXO, { title: { text: 'Prêmio direto (R$ milhões)', font: { size: 11, color: '#8A93A3' } } })
+        }
+      );
+
+      const maiorPremioEmpresa = Math.max(...baseEmpresa.map((l) => l.premio_direto), 1);
+      desenhar('g-ramos-dispersao', [{
+        type: 'scatter',
+        mode: 'markers+text',
+        x: baseEmpresa.map((l) => l.premio_direto / 1e6),
+        y: baseEmpresa.map((l) => l.sin_calc),
+        text: baseEmpresa.map((l) => l.nome_empresa),
+        textposition: 'top center',
+        textfont: { size: 10, color: COR.azul, family: 'IBM Plex Sans, sans-serif' },
+        marker: {
+          size: baseEmpresa.map((l) => l.premio_direto),
+          sizemode: 'area',
+          sizeref: (2 * maiorPremioEmpresa) / (48 * 48),
+          color: baseEmpresa.map((_, indice) => indice),
+          colorscale: ESCALA_AZUL,
+          line: { color: '#FFFFFF', width: 1.2 },
+          opacity: 0.9,
+          showscale: false
+        },
+        customdata: baseEmpresa.map((l) => [l.nome_empresa, fmt.moeda(l.premio_direto), fmt.pct(l.sin_calc)]),
+        hovertemplate: '<b>%{customdata[0]}</b><br>Prêmio direto: %{customdata[1]}<br>Sinistralidade: %{customdata[2]}<extra></extra>'
+      }], {
+        height: Math.max(360, empresas.length * 36 + 180),
+        xaxis: Object.assign({}, EIXO, { title: { text: 'Prêmio direto (R$ milhões)', font: { size: 11, color: '#8A93A3' } } }),
+        yaxis: Object.assign({}, EIXO, { title: { text: 'Sinistralidade (%)', font: { size: 11, color: '#8A93A3' } } })
+      });
+
+      const empresasSin = baseEmpresa
+        .filter((l) => l.sin_calc != null)
+        .sort((a, b) => b.sin_calc - a.sin_calc)
+        .reverse();
+      desenhar('g-ramos-sinistralidade', [{
+        type: 'bar',
+        orientation: 'h',
+        x: empresasSin.map((l) => l.sin_calc),
+        y: empresasSin.map((l) => l.nome_empresa),
+        marker: { color: empresasSin.map((l) => l.sin_calc), colorscale: ESCALA_MAGENTA, showscale: false },
+        customdata: empresasSin.map((l) => [fmt.pct(l.sin_calc), fmt.moeda(l.premio_ganho)]),
+        hovertemplate: '%{y}<br>Sinistralidade: %{customdata[0]}<br>Prêmio ganho: %{customdata[1]}<extra></extra>'
+      }], {
+        height: Math.max(320, empresasSin.length * 34 + 110),
+        margin: { l: 6, r: 14, t: 10, b: 34 },
+        yaxis: Object.assign({}, EIXO, { tickfont: { size: 11, color: COR.cinza } }),
+        xaxis: Object.assign({}, EIXO, { ticksuffix: '%' })
+      });
+
+      const colunasComparacao = [
+        { chave: 'nome_empresa', rotulo: 'Empresa', tipo: 'texto' },
+        { chave: 'nome_ramo', rotulo: 'Ramo', tipo: 'texto' },
+        { chave: 'premio_direto', rotulo: 'Prêmio direto', tipo: 'moeda' },
+        { chave: 'premio_ganho', rotulo: 'Prêmio ganho', tipo: 'moeda' },
+        { chave: 'sinistro_ocorrido', rotulo: 'Sinistro ocorrido', tipo: 'moeda' },
+        { chave: 'sin_calc', rotulo: 'Sinistralidade', tipo: 'pct', classe: (v) => classeSinistralidade(v) }
+      ];
+      pintarTabela(
+        'tabela-ramos',
+        colunasComparacao,
+        baseEmpresaRamo,
+        `${fmt.inteiro(baseEmpresaRamo.length)} combinações empresa × ramo`
+      );
+      return;
+    }
+
     document.getElementById('t-ramos-mix').textContent =
       `Top ${n} ramos em ${fmt.mes(selecionadas[selecionadas.length - 1])}${selecionadas.length > 1 ? ' (acumulado ' + selecionadas.length + ' meses)' : ''}`;
+    definirTituloGrafico('g-ramos-dispersao', 'Sinistralidade × porte do ramo');
+    definirTituloGrafico('g-ramos-sinistralidade', 'Ramos com maior sinistralidade');
 
     desenhar('g-ramos-mix', [
       {
@@ -499,6 +633,7 @@
       vazio('g-evolucao', 'Sem dados para a evolução temporal neste recorte.');
       return;
     }
+    const compararEmpresas = estado.empresas.size > 1;
     const competencias = competenciasDe(fonte);
     const serie = competencias.map((competencia) => {
       const doMes = fonte.filter((l) => String(l.competencia) === competencia);
@@ -517,6 +652,123 @@
         : ((linha.premio_direto / serie[indice - 1].premio_direto) - 1) * 100;
     });
     const rotulos = serie.map((l) => fmt.mes(l.competencia));
+
+    if (compararEmpresas) {
+      const empresas = empresasSelecionadas();
+      const baseEmpresaCompetencia = comSinistralidade(porEmpresaCompetencia(fonte));
+      const indiceEmpresaCompetencia = new Map(
+        baseEmpresaCompetencia.map((linha) => [`${linha.codigo_empresa}|${linha.competencia}`, linha])
+      );
+      const linhasTabela = [];
+
+      definirTituloGrafico('g-evolucao', 'Evolução do prêmio direto por empresa');
+      definirTituloGrafico('g-variacao', 'Variação mensal do prêmio por empresa');
+      definirTituloGrafico('g-sazonalidade', 'Prêmio direto mensal por empresa (R$ milhões)');
+
+      const tracesEvolucao = empresas.map((codigo) => {
+        const serieEmpresa = competencias.map((competencia) => {
+          const linha = indiceEmpresaCompetencia.get(`${codigo}|${competencia}`) || {
+            codigo_empresa: codigo,
+            nome_empresa: nomeEmpresa(codigo),
+            competencia,
+            premio_direto: 0,
+            sinistro_ocorrido: 0,
+            premio_ganho: 0,
+            sin_calc: null
+          };
+          return Object.assign({}, linha);
+        });
+        comSinistralidade(serieEmpresa);
+        serieEmpresa.forEach((linha, indice) => {
+          linha.variacao = indice === 0 || !serieEmpresa[indice - 1].premio_direto
+            ? null
+            : ((linha.premio_direto / serieEmpresa[indice - 1].premio_direto) - 1) * 100;
+          linhasTabela.push({
+            competencia: fmt.mes(linha.competencia),
+            nome_empresa: nomeEmpresa(codigo),
+            premio_direto: linha.premio_direto,
+            sinistro_ocorrido: linha.sinistro_ocorrido,
+            sin_calc: linha.sin_calc,
+            variacao: linha.variacao
+          });
+        });
+        return {
+          type: 'scatter',
+          mode: 'lines+markers',
+          name: nomeEmpresa(codigo),
+          x: rotulos,
+          y: serieEmpresa.map((l) => l.premio_direto / 1e6),
+          customdata: serieEmpresa.map((l) => [fmt.moeda(l.premio_direto)]),
+          hovertemplate: '<b>%{fullData.name}</b><br>%{x}<br>Prêmio direto: %{customdata[0]}<extra></extra>'
+        };
+      });
+
+      desenhar('g-evolucao', tracesEvolucao, {
+        height: 460,
+        margin: { l: 6, r: 14, t: 10, b: 34 },
+        xaxis: Object.assign({}, EIXO, { type: 'category' }),
+        yaxis: Object.assign({}, EIXO, { title: { text: 'R$ milhões', font: { size: 11, color: '#8A93A3' } } })
+      });
+
+      desenhar('g-variacao',
+        empresas.map((codigo) => ({
+          type: 'scatter',
+          mode: 'lines+markers',
+          name: nomeEmpresa(codigo),
+          x: rotulos,
+          y: competencias.map((competencia, indice) => {
+            const atual = indiceEmpresaCompetencia.get(`${codigo}|${competencia}`)?.premio_direto || 0;
+            if (indice === 0) return null;
+            const anterior = indiceEmpresaCompetencia.get(`${codigo}|${competencias[indice - 1]}`)?.premio_direto || 0;
+            return anterior ? ((atual / anterior) - 1) * 100 : null;
+          }),
+          hovertemplate: '<b>%{fullData.name}</b><br>%{x}<br>Variação: %{y:.2f}%<extra></extra>'
+        })),
+        {
+          height: 360,
+          margin: { l: 6, r: 14, t: 10, b: 34 },
+          xaxis: Object.assign({}, EIXO, { type: 'category' }),
+          yaxis: Object.assign({}, EIXO, { ticksuffix: '%' })
+        }
+      );
+
+      desenhar('g-sazonalidade', [{
+        type: 'heatmap',
+        z: empresas.map((codigo) =>
+          competencias.map((competencia) => (indiceEmpresaCompetencia.get(`${codigo}|${competencia}`)?.premio_direto || 0) / 1e6)
+        ),
+        x: rotulos,
+        y: empresas.map((codigo) => nomeEmpresa(codigo)),
+        colorscale: ESCALA_AZUL,
+        text: empresas.map((codigo) =>
+          competencias.map((competencia) => fmt.moeda(indiceEmpresaCompetencia.get(`${codigo}|${competencia}`)?.premio_direto || 0))
+        ),
+        hovertemplate: '%{y}<br>%{x}: %{text}<extra></extra>',
+        colorbar: { title: { text: 'R$ mi', font: { size: 10 } }, thickness: 10, len: 0.8, outlinewidth: 0 },
+        xgap: 2,
+        ygap: 2
+      }], {
+        height: Math.max(300, empresas.length * 42 + 140),
+        margin: { l: 6, r: 14, t: 10, b: 34 },
+        xaxis: Object.assign({}, EIXO, { type: 'category', side: 'top' }),
+        yaxis: Object.assign({}, EIXO, { autorange: 'reversed', tickfont: { size: 11, color: COR.cinza } })
+      });
+
+      const colunasComparacao = [
+        { chave: 'competencia', rotulo: 'Competência', tipo: 'texto' },
+        { chave: 'nome_empresa', rotulo: 'Empresa', tipo: 'texto' },
+        { chave: 'premio_direto', rotulo: 'Prêmio direto', tipo: 'moeda' },
+        { chave: 'sinistro_ocorrido', rotulo: 'Sinistro ocorrido', tipo: 'moeda' },
+        { chave: 'sin_calc', rotulo: 'Sinistralidade', tipo: 'pct', classe: (v) => classeSinistralidade(v) },
+        { chave: 'variacao', rotulo: 'Variação m/m', tipo: 'pct' }
+      ];
+      pintarTabela('tabela-serie', colunasComparacao, linhasTabela, `${fmt.inteiro(linhasTabela.length)} linhas comparativas`);
+      return;
+    }
+
+    definirTituloGrafico('g-evolucao', 'Evolução mensal do prêmio, sinistro e sinistralidade');
+    definirTituloGrafico('g-variacao', 'Variação do prêmio direto mês a mês');
+    definirTituloGrafico('g-sazonalidade', 'Prêmio direto mensal por ramo (R$ milhões)');
 
     desenhar('g-evolucao', [
       {
