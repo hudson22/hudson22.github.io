@@ -150,6 +150,8 @@ button, input, select { font: inherit; color: inherit; }
   top: 1.2rem;
   display: grid;
   gap: 1.1rem;
+  align-self: start;
+  min-width: 0;
 }
 .lateral__bloco {
   background: var(--branco);
@@ -565,14 +567,48 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
 }
 
 /* ------------------------------------------------------------ responsivo */
+@media (max-width: 1240px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+  .lateral {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .lateral__bloco {
+    min-width: 0;
+  }
+  .abas {
+    gap: .25rem .9rem;
+  }
+  .aba {
+    margin-right: 0;
+  }
+}
+
 @media (max-width: 1000px) {
-  .layout { grid-template-columns: minmax(0, 1fr); }
-  .lateral { position: static; }
+  .lateral { grid-template-columns: minmax(0, 1fr); }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grade--2 { grid-template-columns: minmax(0, 1fr); }
+  .controles {
+    gap: .8rem 1rem;
+  }
+  .controle,
+  .controle--largo {
+    min-width: min(100%, 220px);
+  }
 }
 @media (max-width: 620px) {
   .topo__interno, .layout { width: calc(100% - 2rem); }
   .kpis { grid-template-columns: minmax(0, 1fr); }
   .aba { margin-right: .9rem; font-size: .84rem; }
+  .controles {
+    padding: .8rem;
+  }
+  .controle,
+  .controle--largo {
+    min-width: 100%;
+  }
 }
