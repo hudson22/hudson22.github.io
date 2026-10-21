@@ -1,0 +1,187 @@
+﻿  202610: ainda sem dados publicados; recuando um mes.
+  202609: ainda sem dados publicados; recuando um mes.
+  Mes mais recente publicado: 202608 (pedido: 202610).
+Formulario lido: 342 empresas, 161 ramos disponiveis.
+Plano: 178 consultas (202601-202608); 172 a executar, 6 em cache.
+  [1/172] total-mes_202601-202608_ramo-Todos.parquet -> 8 linhas
+  [2/172] ramo-mes_202604_ramo-Todos.parquet -> 143 linhas
+  [3/172] ramo-mes_202605_ramo-Todos.parquet -> 143 linhas
+  [4/172] ramo-mes_202606_ramo-Todos.parquet -> 143 linhas
+  [5/172] ramo-mes_202607_ramo-Todos.parquet -> 143 linhas
+  [6/172] ramo-mes_202608_ramo-Todos.parquet -> 142 linhas
+  [7/172] empresa-mes_202604_ramo-Todos.parquet -> 155 linhas
+  [8/172] empresa-mes_202605_ramo-Todos.parquet -> 154 linhas
+  [9/172] empresa-mes_202606_ramo-Todos.parquet -> 156 linhas
+  [10/172] empresa-mes_202607_ramo-Todos.parquet -> 156 linhas
+  [11/172] empresa-mes_202608_ramo-Todos.parquet -> 156 linhas
+  [12/172] empresa-ramo_202601-202608_ramo-0111.parquet -> 46 linhas
+  [13/172] empresa-ramo_202601-202608_ramo-0112.parquet -> 37 linhas
+  [14/172] FALHA empresa-ramo_202601-202608_ramo-0113.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0113      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [15/172] empresa-ramo_202601-202608_ramo-0114.parquet -> 76 linhas
+  [16/172] empresa-ramo_202601-202608_ramo-0115.parquet -> 48 linhas
+  [17/172] empresa-ramo_202601-202608_ramo-0116.parquet -> 56 linhas
+  [18/172] empresa-ramo_202601-202608_ramo-0117.parquet -> 1 linhas
+  [19/172] empresa-ramo_202601-202608_ramo-0118.parquet -> 73 linhas
+  [20/172] empresa-ramo_202601-202608_ramo-0141.parquet -> 65 linhas
+  [21/172] FALHA empresa-ramo_202601-202608_ramo-0142.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0142      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [22/172] FALHA empresa-ramo_202601-202608_ramo-0143.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0143      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [23/172] empresa-ramo_202601-202608_ramo-0167.parquet -> 70 linhas
+  [24/172] empresa-ramo_202601-202608_ramo-0171.parquet -> 84 linhas
+  [25/172] empresa-ramo_202601-202608_ramo-0173.parquet -> 46 linhas
+  [26/172] FALHA empresa-ramo_202601-202608_ramo-0176.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0176      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [27/172] empresa-ramo_202601-202608_ramo-0195.parquet -> 43 linhas
+  [28/172] empresa-ramo_202601-202608_ramo-0196.parquet -> 62 linhas
+  [29/172] empresa-ramo_202601-202608_ramo-0234.parquet -> 45 linhas
+  [30/172] empresa-ramo_202601-202608_ramo-0272.parquet -> 24 linhas
+  [31/172] empresa-ramo_202601-202608_ramo-0274.parquet -> 26 linhas
+  [32/172] empresa-ramo_202601-202608_ramo-0310.parquet -> 52 linhas
+  [33/172] empresa-ramo_202601-202608_ramo-0313.parquet -> 34 linhas
+  [34/172] empresa-ramo_202601-202608_ramo-0327.parquet -> 24 linhas
+  [35/172] empresa-ramo_202601-202608_ramo-0351.parquet -> 69 linhas
+  [36/172] empresa-ramo_202601-202608_ramo-0378.parquet -> 62 linhas
+  [37/172] empresa-ramo_202601-202608_ramo-0433.parquet -> 43 linhas
+  [38/172] empresa-ramo_202601-202608_ramo-0435.parquet -> 45 linhas
+  [39/172] empresa-ramo_202601-202608_ramo-0437.parquet -> 28 linhas
+  [40/172] empresa-ramo_202601-202608_ramo-0457.parquet -> 31 linhas
+  [41/172] FALHA empresa-ramo_202601-202608_ramo-0484.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0484      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [42/172] empresa-ramo_202601-202608_ramo-0520.parquet -> 61 linhas
+  [43/172] empresa-ramo_202601-202608_ramo-0523.parquet -> 26 linhas
+  [44/172] empresa-ramo_202601-202608_ramo-0524.parquet -> 50 linhas
+  [45/172] empresa-ramo_202601-202608_ramo-0525.parquet -> 37 linhas
+  [46/172] empresa-ramo_202601-202608_ramo-0526.parquet -> 21 linhas
+  [47/172] empresa-ramo_202601-202608_ramo-0527.parquet -> 5 linhas
+  [48/172] empresa-ramo_202601-202608_ramo-0531.parquet -> 67 linhas
+  [49/172] empresa-ramo_202601-202608_ramo-0542.parquet -> 50 linhas
+  [50/172] empresa-ramo_202601-202608_ramo-0544.parquet -> 25 linhas
+  [51/172] empresa-ramo_202601-202608_ramo-0553.parquet -> 69 linhas
+  [52/172] FALHA empresa-ramo_202601-202608_ramo-0583.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0583      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [53/172] empresa-ramo_202601-202608_ramo-0588.parquet -> 80 linhas
+  [54/172] empresa-ramo_202601-202608_ramo-0589.parquet -> 37 linhas
+  [55/172] empresa-ramo_202601-202608_ramo-0621.parquet -> 56 linhas
+  [56/172] empresa-ramo_202601-202608_ramo-0622.parquet -> 55 linhas
+  [57/172] empresa-ramo_202601-202608_ramo-0623.parquet -> 25 linhas
+  [58/172] empresa-ramo_202601-202608_ramo-0627.parquet -> 26 linhas
+  [59/172] empresa-ramo_202601-202608_ramo-0628.parquet -> 36 linhas
+  [60/172] empresa-ramo_202601-202608_ramo-0632.parquet -> 42 linhas
+  [61/172] empresa-ramo_202601-202608_ramo-0638.parquet -> 40 linhas
+  [62/172] empresa-ramo_202601-202608_ramo-0644.parquet -> 22 linhas
+  [63/172] empresa-ramo_202601-202608_ramo-0645.parquet -> 6 linhas
+  [64/172] empresa-ramo_202601-202608_ramo-0652.parquet -> 42 linhas
+  [65/172] empresa-ramo_202601-202608_ramo-0654.parquet -> 49 linhas
+  [66/172] empresa-ramo_202601-202608_ramo-0655.parquet -> 45 linhas
+  [67/172] empresa-ramo_202601-202608_ramo-0656.parquet -> 42 linhas
+  [68/172] empresa-ramo_202601-202608_ramo-0658.parquet -> 31 linhas
+  [69/172] empresa-ramo_202601-202608_ramo-0659.parquet -> 22 linhas
+  [70/172] empresa-ramo_202601-202608_ramo-0711.parquet -> 20 linhas
+  [71/172] empresa-ramo_202601-202608_ramo-0739.parquet -> 43 linhas
+  [72/172] empresa-ramo_202601-202608_ramo-0740.parquet -> 44 linhas
+  [73/172] empresa-ramo_202601-202608_ramo-0743.parquet -> 24 linhas
+  [74/172] empresa-ramo_202601-202608_ramo-0745.parquet -> 50 linhas
+  [75/172] empresa-ramo_202601-202608_ramo-0746.parquet -> 68 linhas
+  [76/172] empresa-ramo_202601-202608_ramo-0747.parquet -> 35 linhas
+  [77/172] empresa-ramo_202601-202608_ramo-0748.parquet -> 44 linhas
+  [78/172] empresa-ramo_202601-202608_ramo-0749.parquet -> 29 linhas
+  [79/172] empresa-ramo_202601-202608_ramo-0750.parquet -> 36 linhas
+  [80/172] empresa-ramo_202601-202608_ramo-0775.parquet -> 70 linhas
+  [81/172] empresa-ramo_202601-202608_ramo-0776.parquet -> 69 linhas
+  [82/172] empresa-ramo_202601-202608_ramo-0819.parquet -> 39 linhas
+  [83/172] FALHA empresa-ramo_202601-202608_ramo-0848.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0848      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [84/172] FALHA empresa-ramo_202601-202608_ramo-0849.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0849      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [85/172] empresa-ramo_202601-202608_ramo-0859.parquet -> 21 linhas
+  [86/172] empresa-ramo_202601-202608_ramo-0860.parquet -> 38 linhas
+  [87/172] empresa-ramo_202601-202608_ramo-0870.parquet -> 39 linhas
+  [88/172] empresa-ramo_202601-202608_ramo-0929.parquet -> 86 linhas
+  [89/172] empresa-ramo_202601-202608_ramo-0936.parquet -> 31 linhas
+  [90/172] FALHA empresa-ramo_202601-202608_ramo-0949.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='0949      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [91/172] empresa-ramo_202601-202608_ramo-0969.parquet -> 59 linhas
+  [92/172] empresa-ramo_202601-202608_ramo-0977.parquet -> 91 linhas
+  [93/172] empresa-ramo_202601-202608_ramo-0980.parquet -> 52 linhas
+  [94/172] empresa-ramo_202601-202608_ramo-0981.parquet -> 53 linhas
+  [95/172] empresa-ramo_202601-202608_ramo-0982.parquet -> 104 linhas
+  [96/172] empresa-ramo_202601-202608_ramo-0983.parquet -> 28 linhas
+  [97/172] empresa-ramo_202601-202608_ramo-0984.parquet -> 67 linhas
+  [98/172] empresa-ramo_202601-202608_ramo-0986.parquet -> 27 linhas
+  [99/172] empresa-ramo_202601-202608_ramo-0987.parquet -> 62 linhas
+  [100/172] empresa-ramo_202601-202608_ramo-0990.parquet -> 66 linhas
+  [101/172] empresa-ramo_202601-202608_ramo-0991.parquet -> 54 linhas
+  [102/172] empresa-ramo_202601-202608_ramo-0992.parquet -> 30 linhas
+  [103/172] empresa-ramo_202601-202608_ramo-0993.parquet -> 107 linhas
+  [104/172] empresa-ramo_202601-202608_ramo-0994.parquet -> 34 linhas
+  [105/172] empresa-ramo_202601-202608_ramo-0996.parquet -> 4 linhas
+  [106/172] empresa-ramo_202601-202608_ramo-0997.parquet -> 1 linhas
+  [107/172] empresa-ramo_202601-202608_ramo-1061.parquet -> 42 linhas
+  [108/172] empresa-ramo_202601-202608_ramo-1065.parquet -> 40 linhas
+  [109/172] empresa-ramo_202601-202608_ramo-1066.parquet -> 34 linhas
+  [110/172] empresa-ramo_202601-202608_ramo-1068.parquet -> 39 linhas
+  [111/172] empresa-ramo_202601-202608_ramo-1101.parquet -> 40 linhas
+  [112/172] empresa-ramo_202601-202608_ramo-1102.parquet -> 32 linhas
+  [113/172] empresa-ramo_202601-202608_ramo-1103.parquet -> 27 linhas
+  [114/172] empresa-ramo_202601-202608_ramo-1104.parquet -> 26 linhas
+  [115/172] empresa-ramo_202601-202608_ramo-1105.parquet -> 27 linhas
+  [116/172] empresa-ramo_202601-202608_ramo-1106.parquet -> 25 linhas
+  [117/172] empresa-ramo_202601-202608_ramo-1107.parquet -> 37 linhas
+  [118/172] empresa-ramo_202601-202608_ramo-1108.parquet -> 31 linhas
+  [119/172] empresa-ramo_202601-202608_ramo-1109.parquet -> 27 linhas
+  [120/172] empresa-ramo_202601-202608_ramo-1111.parquet -> 21 linhas
+  [121/172] empresa-ramo_202601-202608_ramo-1112.parquet -> 11 linhas
+  [122/172] empresa-ramo_202601-202608_ramo-1113.parquet -> 10 linhas
+  [123/172] empresa-ramo_202601-202608_ramo-1114.parquet -> 10 linhas
+  [124/172] FALHA empresa-ramo_202601-202608_ramo-1128.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='1128      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [125/172] FALHA empresa-ramo_202601-202608_ramo-1129.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='1129      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [126/172] empresa-ramo_202601-202608_ramo-1130.parquet -> 49 linhas
+  [127/172] FALHA empresa-ramo_202601-202608_ramo-1161.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='1161      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [128/172] empresa-ramo_202601-202608_ramo-1162.parquet -> 55 linhas
+  [129/172] empresa-ramo_202601-202608_ramo-1163.parquet -> 39 linhas
+  [130/172] empresa-ramo_202601-202608_ramo-1164.parquet -> 40 linhas
+  [131/172] FALHA empresa-ramo_202601-202608_ramo-1165.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='1165      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [132/172] empresa-ramo_202601-202608_ramo-1198.parquet -> 30 linhas
+  [133/172] empresa-ramo_202601-202608_ramo-1279.parquet -> 22 linhas
+  [134/172] empresa-ramo_202601-202608_ramo-1285.parquet -> 1 linhas
+  [135/172] FALHA empresa-ramo_202601-202608_ramo-1286.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='1286      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [136/172] FALHA empresa-ramo_202601-202608_ramo-1287.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='1287      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [137/172] empresa-ramo_202601-202608_ramo-1299.parquet -> 14 linhas
+  [138/172] empresa-ramo_202601-202608_ramo-1329.parquet -> 74 linhas
+  [139/172] empresa-ramo_202601-202608_ramo-1336.parquet -> 23 linhas
+  [140/172] empresa-ramo_202601-202608_ramo-1369.parquet -> 53 linhas
+  [141/172] empresa-ramo_202601-202608_ramo-1377.parquet -> 69 linhas
+  [142/172] empresa-ramo_202601-202608_ramo-1380.parquet -> 38 linhas
+  [143/172] empresa-ramo_202601-202608_ramo-1381.parquet -> 90 linhas
+  [144/172] empresa-ramo_202601-202608_ramo-1383.parquet -> 30 linhas
+  [145/172] empresa-ramo_202601-202608_ramo-1384.parquet -> 63 linhas
+  [146/172] empresa-ramo_202601-202608_ramo-1386.parquet -> 23 linhas
+  [147/172] empresa-ramo_202601-202608_ramo-1387.parquet -> 50 linhas
+  [148/172] empresa-ramo_202601-202608_ramo-1390.parquet -> 62 linhas
+  [149/172] empresa-ramo_202601-202608_ramo-1391.parquet -> 83 linhas
+  [150/172] empresa-ramo_202601-202608_ramo-1392.parquet -> 39 linhas
+  [151/172] empresa-ramo_202601-202608_ramo-1396.parquet -> 3 linhas
+  [152/172] empresa-ramo_202601-202608_ramo-1417.parquet -> 29 linhas
+  [153/172] empresa-ramo_202601-202608_ramo-1428.parquet -> 24 linhas
+  [154/172] empresa-ramo_202601-202608_ramo-1433.parquet -> 42 linhas
+  [155/172] empresa-ramo_202601-202608_ramo-1457.parquet -> 19 linhas
+  [156/172] empresa-ramo_202601-202608_ramo-1528.parquet -> 42 linhas
+  [157/172] empresa-ramo_202601-202608_ramo-1535.parquet -> 43 linhas
+  [158/172] empresa-ramo_202601-202608_ramo-1537.parquet -> 29 linhas
+  [159/172] empresa-ramo_202601-202608_ramo-1574.parquet -> 8 linhas
+  [160/172] empresa-ramo_202601-202608_ramo-1597.parquet -> 34 linhas
+  [161/172] empresa-ramo_202601-202608_ramo-1601.parquet -> 41 linhas
+  [162/172] empresa-ramo_202601-202608_ramo-1602.parquet -> 26 linhas
+  [163/172] FALHA empresa-ramo_202601-202608_ramo-1603.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='1603      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [164/172] empresa-ramo_202601-202608_ramo-1734.parquet -> 24 linhas
+  [165/172] empresa-ramo_202601-202608_ramo-1872.parquet -> 8 linhas
+  [166/172] empresa-ramo_202601-202608_ramo-1985.parquet -> 1 linhas
+  [167/172] FALHA empresa-ramo_202601-202608_ramo-2079.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='2079      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [168/172] FALHA empresa-ramo_202601-202608_ramo-2199.parquet: Consulta falhou apos 3 tentativas (EMP, 202601-202608, ramo='2199      ', empresa='Todas'): Grade de resultado nao encontrada. A pagina pode ter retornado o formulario sem processar (sessao expirada ou filtro invalido).
+  [169/172] empresa-ramo_202601-202608_ramo-2201.parquet -> 1 linhas
+  [170/172] empresa-ramo_202601-202608_ramo-2202.parquet -> 1 linhas
+  [171/172] empresa-ramo_202601-202608_ramo-2203.parquet -> 1 linhas
+  [172/172] empresa-ramo_202601-202608_ramo-2293.parquet -> 9 linhas
+Coleta encerrada em 297s: 154 executadas, 18 falhas.
+Tabelas tratadas:
+  fato_total_mes: 8 linhas
+  fato_ramo_mes: 1143 linhas
+  fato_empresa_mes: 1235 linhas
+  fato_empresa_ramo: 5693 linhas
+  dim_empresa: 159 linhas
+  dim_ramo: 143 linhas
+Reconciliacao empresa(mes) vs total: maior desvio 0.0000%
+Tabelas tratadas atualizadas em dados/tratado.

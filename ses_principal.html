@@ -1,0 +1,461 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="ctl00_Head1"><link href="../portal.css" rel="stylesheet" type="text/css" /><link href="../acessibilidade.css" rel="stylesheet" type="text/css" />
+    <title>SES</title>
+    <style type="text/css">
+        .caixaTexto
+        {
+            font-size: 9pt;
+            font-style: normal;
+            font-weight: normal;
+            color: #006600;
+            text-align: left;
+            font-family: Verdana;
+        }
+        .caixaTexto2
+        {
+            border: 4px solid #21BE00;
+            font-size: 9pt;
+            font-style: normal;
+            font-weight: normal;
+            color: #FFFFFF;
+            text-align: left;
+            font-family: Verdana;
+            background-color: #21BE00;
+            vertical-align: middle;
+        }
+        .indicador
+        {
+            font-weight: bold;
+            color: #FF0000;
+            font-size: 12pt;
+        }
+        #painel
+        {
+            top: 261px;
+            left: 250px;
+        }
+        #painelIE
+        {
+            top: 265px;
+            left: 250px;
+        }
+        </style>
+
+    
+    <script type="text/javascript" language="javascript">
+    <!--
+        function findPosX(obj) {
+            var curleft = 0;
+            if (obj.offsetParent)
+                while (1) {
+                curleft += obj.offsetLeft;
+                if (!obj.offsetParent)
+                    break;
+                obj = obj.offsetParent;
+            }
+            else if (obj.x)
+                curleft += obj.x;
+            return curleft;
+        }
+
+        function findPosY(obj) {
+            var curtop = 0;
+            if (obj.offsetParent)
+                while (1) {
+                curtop += obj.offsetTop;
+                if (!obj.offsetParent)
+                    break;
+                obj = obj.offsetParent;
+            }
+            else if (obj.y)
+                curtop += obj.y;
+            return curtop;
+        }
+
+        function pageHeight() {
+            return window.innerHeight != null ? window.innerHeight : document.documentElement && document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body != null ? document.body.clientHeight : null;
+        }
+
+        function reposiciona() {
+            //var altCol3 = document.getElementById('coluna3').offsetHeight;
+            //var altCol2 = document.getElementById('coluna2').offsetHeight;
+            var posicao = findPosY(document.getElementById('portal-footer'));
+
+            //alert(altCol2+"  "+altCol3+"   "+posicao);
+            //if (altCol2 > altCol3) {
+            //    if (navigator.appName.indexOf("Microsoft") != -1) { //IE
+            //        document.getElementById('rodapesusep').style.top = altCol2 + posicao - altCol3;
+            //        document.getElementById('fimpag').style.top = altCol2 + posicao - altCol3;
+            //    } else {
+            //        document.getElementById('rodapesusep').style.top = (altCol2 + posicao - altCol3) + "px";
+            //        document.getElementById('fimpag').style.top = (altCol2 + posicao - altCol3) + "px";
+            //    }
+            //}
+
+            posicao = findPosY(document.getElementById('portal-footer'));
+            var posfim;
+           
+            posfim = pageHeight() - 45;
+
+            if (posicao < posfim) {
+                if (navigator.appName.indexOf("Microsoft") != -1) { //IE
+                    //document.getElementById('portal-footer').style.top = posfim - posicao;
+                    document.getElementById('portal-columns').style.height = posfim - 123;
+                    //document.getElementById('fimpag').style.top = posfim - posicao;
+                } else {
+                    //document.getElementById('portal-footer').style.top = (posfim - posicao) + "px";
+                    document.getElementById('portal-columns').style.height = (posfim - 123) + "px";
+                    //document.getElementById('fimpag').style.top = (posfim - posicao) + "px";
+                }
+            }
+        }
+     //-->
+     </script>
+    
+<title>
+
+</title></head>
+<body onload="reposiciona()">
+    <div id="barra-brasil-v3"><span><div class="imagemGov"><a href="http://www.brasil.gov.br" target="_blank" class="brasilgov"></a></div></span></div>
+
+    <div id="visual-portal-wrapper">
+
+    <div id="portal-header">
+    <a id="portal-logo" accesskey="1"
+       href="http://www.susep.gov.br">
+        <img src="http://www.susep.gov.br/logo_susep.png"
+             alt="SUSEP Superitendência de Seguros Privados" /></a>
+    </div>
+
+    <div class="visualClear" id="clear-space-before-wrapper-table"><!-- --></div>
+
+    <div id="portal-columns">
+        <form name="aspnetForm" method="post" action="./principal.aspx" id="aspnetForm">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMjAxMjM2ODExD2QWAmYPZBYCAgEPZBYCAgEPZBYGAgUPZBYCZg9kFgwCAQ8QDxYGHg1EYXRhVGV4dEZpZWxkBQlkZXNjcmljYW8eDkRhdGFWYWx1ZUZpZWxkBQJpZB4LXyFEYXRhQm91bmRnZBAVFiFTZWxlY2lvbmUgYSBjb25zdWx0YSBkZXNlamFkYSAuLi4rQ2FwaXRhbGl6YcOnw6NvOiBEZW1vbnN0cmHDp8O1ZXMgQ29udMOhYmVpcyBDYXBpdGFsaXphw6fDo286IFByb3Zpc8OjbyBUb3RhbCBFQVBQOiBEZW1vbnN0cmHDp8O1ZXMgQ29udMOhYmVpcxVFQVBQOiBQcm92aXPDo28gVG90YWwxUmVzc2VndXJhZG9yYXMgTG9jYWlzOiBEZW1vbnN0cmHDp8O1ZXMgQ29udMOhYmVpcytSZXNzZWd1cmFkb3JhcyBMb2NhaXM6IExpbWl0ZSBkZSBSZXRlbsOnw6NvIVJlc3NlZ3VyYWRvcmFzIExvY2FpczogUHJvdmlzw7VlcydTZWd1cmFkb3JhczogRGVtb25zdHJhw6fDtWVzIENvbnTDoWJlaXMhU2VndXJhZG9yYXM6IExpbWl0ZSBkZSBSZXRlbsOnw6NvN1NlZ3VyYWRvcmFzOiBQcm92aXPDo28gZGFzIE9wZXJhw6fDtWVzIGRlIFByZXZpZMOqbmNpYSAfU2VndXJhZG9yYXM6IFByb3Zpc8OjbyBwb3IgUmFtbxxTZWd1cmFkb3JhczogUHJvdmlzw6NvIFRvdGFsIlNlZ3VyYWRvcmFzOiBQcm92aXPDtWVzIERldGFsaGFkYXMgVG9kbyBvIE1lcmNhZG86IEFkbWluaXN0cmFkb3JlcyAdVG9kbyBvIE1lcmNhZG86IEF0aXZvcyBUb3RhaXMhVG9kbyBvIE1lcmNhZG86IEF0aXZvcyBWaW5jdWxhZG9zGFRvZG8gbyBNZXJjYWRvOiBDb250YXRvcx1Ub2RvIG8gTWVyY2FkbzogRGVwZW5kw6puY2lhcyJUb2RvIG8gTWVyY2FkbzogR3J1cG9zIEVjb27DtG1pY29zK1RvZG8gbyBNZXJjYWRvOiBQYXJ0aWNpcGHDp8O1ZXMgQWNpb27DoXJpYXMtVG9kbyBvIE1lcmNhZG86IFBhdHJpbcO0bmlvIEzDrXF1aWRvIEFqdXN0YWRvFRYBMAIzNgIzNwIyOQIzMAI1NQI2NgI1OAIxNAIyNAIxNgI2NwIxNQIxNwI1MAI3MAI2OQI1MQI0NwI0OQI1MgI0NhQrAxZnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnFgFmZAIDDw8WAh4HVmlzaWJsZWhkZAIFDxAPFgYfAAUJZGVzY3JpY2FvHwEFAmlkHwJnZBAVFSFTZWxlY2lvbmUgYSBjb25zdWx0YSBkZXNlamFkYSAuLi4lQ2FwaXRhbGl6YcOnw6NvOiBEYWRvcyBwb3IgbW9kYWxpZGFkZR1DYXBpdGFsaXphw6fDo286IERhZG9zIHBvciBVRiBDYXBpdGFsaXphw6fDo286IFByw6ptaW9zICggVUYgKSZDYXBpdGFsaXphw6fDo286IFByw6ptaW9zICggVUYgdG9kYXMgKShDYXBpdGFsaXphw6fDo286IFF1YW50aWRhZGVzIGRlIFTDrXR1bG9zLFByZXZpZMOqbmNpYSBlbSBFQVBQOiBDb250cmlidWnDp8O1ZXMgKCBVRiApMlByZXZpZMOqbmNpYSBlbSBFQVBQOiBDb250cmlidWnDp8O1ZXMgKCBVRiB0b2RhcyApIlByZXZpZMOqbmNpYSBlbSBFQVBQOiBEYWRvcyBwb3IgVUYzUHJldmlkw6puY2lhIGVtIFNlZ3VyYWRvcmFzOiBDb250cmlidWnDp8O1ZXMgKCBVRiApOVByZXZpZMOqbmNpYSBlbSBTZWd1cmFkb3JhczogQ29udHJpYnVpw6fDtWVzICggVUYgdG9kYXMgKSlQcmV2aWTDqm5jaWEgZW0gU2VndXJhZG9yYXM6IERhZG9zIHBvciBVRiVQcmV2aWTDqm5jaWE6IFBvcnRhYmlsaWRhZGVzIEV4dGVybmFzKlByZXZpZMOqbmNpYTogUXVhbnRpZGFkZXMgZGUgUGFydGljaXBhbnRlczdQcm9kdXRvcyBkZSBBY3VtdWxhw6fDo286IENvbnRyaWJ1acOnw7VlcyBlIEJlbmVmw61jaW9zN1Jlc3NlZ3Vyb3M6IE1vdmltZW50YcOnw6NvIHBvciBDZXNzaW9uw6FyaWEgRXN0cmFuZ2VpcmEbUmVzc2VndXJvczogUHLDqm1pb3MgR2FuaG9zHVJlc3NlZ3Vyb3M6IFNpbmlzdHJvcyBSZXRpZG9zHVNlZ3Vyb3M6IFByw6ptaW9zIGUgU2luaXN0cm9zJFNlZ3Vyb3M6IFByw6ptaW9zIGUgU2luaXN0cm9zICggVUYgKSpTZWd1cm9zOiBQcsOqbWlvcyBlIFNpbmlzdHJvcyAoIFVGIHRvZGFzICkVFQEwAjczAjYzAjMyAjM0AjYxAjI1AjI3AjY0AjE4AjIxAjY1AjU5AjYwAjcyAjcxAjU2AjU3AjU0ATQCNTMUKwMVZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnFgFmZAIHDw8WAh8DaGRkAgkPEA8WBh8ABQlkZXNjcmljYW8fAQUCaWQfAmdkEBUJIVNlbGVjaW9uZSBhIGNvbnN1bHRhIGRlc2VqYWRhIC4uLhxQR0JMOiBDb250cmlidWnDp8O1ZXMgKCBVRiApIlBHQkw6IENvbnRyaWJ1acOnw7VlcyAoIFVGIHRvZGFzICkSUEdCTDogRGFkb3MgcG9yIFVGQFBHQkw6IFByb3Zpc8OjbyBNYXRlbcOhdGljYSBkZSBCZW5lZsOtY2lvcyBhIENvbmNlZGVyICggRnVuZG9zICkOUEdCTDogUmVzZ2F0ZXMiUHJldmlkw6puY2lhIFRyYWRpY2lvbmFsOiBSZXNnYXRlc0BWR0JMOiBQcm92aXPDo28gTWF0ZW3DoXRpY2EgZGUgQmVuZWbDrWNpb3MgYSBDb25jZWRlciAoIEZ1bmRvcyApDlZHQkw6IFJlc2dhdGVzFQkBMAI0MAI0MgI2MgIzOQI0NAI0NQIxMwIxMhQrAwlnZ2dnZ2dnZ2cWAWZkAgsPDxYCHwNoZGQCCQ8PFgIeBFRleHQFBjIwMjYwOGRkAgsPDxYCHwQFEzE5LzEwLzIwMjYgMDA6NDU6MjVkZGTufd/bocvlKLx5PwuoSFmHkF2A312VoI2q6r9MBHLg5g==" />
+
+
+<script src="/menuestatistica/ScriptResource.axd?d=vlsrIJOwny2ywp65RkMhHm3dGZnlcjt5VNsSqHTdIvgoEFi_MfN8bitQPDYJ9M3vZudsTBbn_-dj58HqinGRICB306vzQyerXDGOtzFcRMX52TsgQwxHDcYGClfONOoRqD3IQTj2PcvHH1mr2MgadLeNtwrPoNLHuAaDERLIlG4I3lzsSKGy3BOg1P-fHtOg0&amp;t=583299c4" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BA3FAA00" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdADYjo8wuj1cJYcfnEVCWgChv5iReubL1iPC0j5znpF9Zi2wWtl+bxGZKmwqwOlbWhldwfB2O/W9xMaBpWr0wppaI/yotjb+LKcxgb/69T5DfnrlCiVmMJK047nDl0sISMmk0BnNXsm59vTn9Z55/KkHoPwrPoYB0lTS62/3FRo/DJA6Fg6sBdOuQGi07Oqyidd7TLSBtkOb1wR04uL+uHdFUg5iMO6PVUL/U1wFHI8zQy7v7Nvlf+kC78uncuEisjWrnew/i1r+eTaprzYonhTfDO95LFYe0Qs9bp3OYQcBZ6bBH29RblNdhTgTUrcuM0A9Z4p+2WcT6pj9uLwhlRLRV1ZlJuQ0J0RvAq+WaG8FpW5l1czMfA+2OKcPlS3pqzYvoyVDcBea262mNnzBS0MsbU9WQ4wzsl88M4riQI0vpowbhHzoJRCyJzLN1UdSxfO3xoCRtmZDL7akgWTAfZGAYym6UrUCbyhxBvuQlwSYyQBkfBjZBC/Zu/XqLmqk2VUalusmSQy7Nbgm7vn0wbrm572C/AyyGX6X0PqFr9eNlbuDfiTPeWknKYBYCkYWfZOQGQNMyA7pOBmxY/yKwmMuEaiW3p2CVhpDbXu91RaWTHEdfyoGM1PrssPkCB4qAsFtrTxeqh9qMYbaYBHhTmsXGb3uBbNw0+KcwsspWMXPVdUmn0Csysio4b8MNaXqiAgIjLhuFWmKjH0rMJUxyz8RXfZHXTs11WEkRhi7CuWDse8xbAuWFJh+fPBQCjVcS13Bmv/lZMhsYSjDN2c5k3zr0nNeItmNOgvmrVNk3Z5BESN0icL/ukLacLBnqD8SFo7l83SijVykAygLc6KJYFQu2q6Cs3NrNTOaG2N8mSnyTpYfh9BkQ+JdsavitH4HqyJK4HIH5zTHH51HH0tRGArsipgXg0se8ODJA3iBGQWJ74+K/lIsK9v7C7vWw0/p1BYL2DqJCinuPFsz0qLycmIR1uwfN5ROR9NCo0vyXhrs/+f8o3eJFDW7jvc/gFBiLcTQ+HFdUgEx97jju72yidOyMe6KlrpwAVacoiHUTtyepnvJU+McVkTU1liM8vqtHdHCkvjX3HGaKoKYLu83NM0Q+XYfxasInwBifrp1lwSGsMex99A477mR6kRNOW1balkheEQaz5VuC9PA6l/2qAs236FvnR5N3J4N8PYbQ/X1I1g==" />
+            
+    <div id="indicaAjax" 
+        style="position: absolute; z-index: 30; top: 450px; left: 850px; height: 1px;">
+        <div id="ctl00_ContentPlaceHolder1_UpdateProgress1" style="display:none;">
+	
+                 <img id="ctl00_ContentPlaceHolder1_Image2" src="../images/ajax-loader.gif" border="0" />
+             
+</div>
+    </div>
+    <div style="z-index: 20; position: relative;">
+     
+        <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+           <tr>
+               <td align="center">
+                 <table border="0" cellpadding="0" cellspacing="0" width="868px">
+                     <tr>
+                         <td valign="top" colspan="3">
+                             <h2>SES - Sistema de Estatísticas da SUSEP</h2>
+                         </td>
+                     </tr>
+                 </table>
+                 <table border="0" cellpadding="3" cellspacing="10" width="868px">
+                     <tr>
+                         <td valign="top" align="right" colspan="3">
+                             <font class="caixaTexto"><strong>versão 4.0</strong></font>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td valign="top" align="left" colspan="3" class="ed_td">
+                              <font class="caixaTexto">
+                                <p style="text-align: justify;">
+                                    <table border="0" cellpadding="5" cellspacing="0" width="100%">
+								        <tr>
+                                	        <td>
+                                    	        <a href="https://www2.susep.gov.br/safe/menuestatistica/pims.html" target="_blank"><img src="banner_ascom.png" width="901" height="205" /></a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </p>
+                              </font>                            
+                         </td>
+                     </tr>
+                     <tr>
+                         <td valign="top" align="left" colspan="3">
+                              <font class="caixaTexto">Para consultar o SES selecione uma das op&ccedil;&otilde;es abaixo:</font><br /><br />
+                         </td>
+                     </tr>
+                     <tr>
+                         <td valign="top" align="left" colspan="3">
+                             <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+	
+                                 <table border="0" cellpadding="2" cellspacing="0" width="100%">
+                                        <tr>
+                                         <td align="left" width="45%" valign="top">
+                                           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                               <tr>
+                                                   <td>
+                                                        <font class="caixaTexto">Consultas sobre:</font><br /><br /><br /><br />
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                   <td>
+                                                        <font style="font-size: 11pt; font-weight: bold" class="caixaTexto2">Empresas</font>
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                   <td>
+                                                        <select name="ctl00$ContentPlaceHolder1$edSelEmp" id="ctl00_ContentPlaceHolder1_edSelEmp">
+		<option selected="selected" value="0">Selecione a consulta desejada ...</option>
+		<option value="36">Capitaliza&#231;&#227;o: Demonstra&#231;&#245;es Cont&#225;beis</option>
+		<option value="37">Capitaliza&#231;&#227;o: Provis&#227;o Total</option>
+		<option value="29">EAPP: Demonstra&#231;&#245;es Cont&#225;beis</option>
+		<option value="30">EAPP: Provis&#227;o Total</option>
+		<option value="55">Resseguradoras Locais: Demonstra&#231;&#245;es Cont&#225;beis</option>
+		<option value="66">Resseguradoras Locais: Limite de Reten&#231;&#227;o</option>
+		<option value="58">Resseguradoras Locais: Provis&#245;es</option>
+		<option value="14">Seguradoras: Demonstra&#231;&#245;es Cont&#225;beis</option>
+		<option value="24">Seguradoras: Limite de Reten&#231;&#227;o</option>
+		<option value="16">Seguradoras: Provis&#227;o das Opera&#231;&#245;es de Previd&#234;ncia </option>
+		<option value="67">Seguradoras: Provis&#227;o por Ramo</option>
+		<option value="15">Seguradoras: Provis&#227;o Total</option>
+		<option value="17">Seguradoras: Provis&#245;es Detalhadas</option>
+		<option value="50">Todo o Mercado: Administradores </option>
+		<option value="70">Todo o Mercado: Ativos Totais</option>
+		<option value="69">Todo o Mercado: Ativos Vinculados</option>
+		<option value="51">Todo o Mercado: Contatos</option>
+		<option value="47">Todo o Mercado: Depend&#234;ncias</option>
+		<option value="49">Todo o Mercado: Grupos Econ&#244;micos</option>
+		<option value="52">Todo o Mercado: Participa&#231;&#245;es Acion&#225;rias</option>
+		<option value="46">Todo o Mercado: Patrim&#244;nio L&#237;quido Ajustado</option>
+
+	</select>&nbsp;&nbsp;
+                                                        
+                                                        <br /><br /><br /><br />
+                                                        
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                   <td>
+                                                        <font style="font-size: 11pt; font-weight: bold" class="caixaTexto2">Opera&ccedil;&otilde;es</font>
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                   <td>
+                                                        <select name="ctl00$ContentPlaceHolder1$edSelOp" id="ctl00_ContentPlaceHolder1_edSelOp">
+		<option selected="selected" value="0">Selecione a consulta desejada ...</option>
+		<option value="73">Capitaliza&#231;&#227;o: Dados por modalidade</option>
+		<option value="63">Capitaliza&#231;&#227;o: Dados por UF</option>
+		<option value="32">Capitaliza&#231;&#227;o: Pr&#234;mios ( UF )</option>
+		<option value="34">Capitaliza&#231;&#227;o: Pr&#234;mios ( UF todas )</option>
+		<option value="61">Capitaliza&#231;&#227;o: Quantidades de T&#237;tulos</option>
+		<option value="25">Previd&#234;ncia em EAPP: Contribui&#231;&#245;es ( UF )</option>
+		<option value="27">Previd&#234;ncia em EAPP: Contribui&#231;&#245;es ( UF todas )</option>
+		<option value="64">Previd&#234;ncia em EAPP: Dados por UF</option>
+		<option value="18">Previd&#234;ncia em Seguradoras: Contribui&#231;&#245;es ( UF )</option>
+		<option value="21">Previd&#234;ncia em Seguradoras: Contribui&#231;&#245;es ( UF todas )</option>
+		<option value="65">Previd&#234;ncia em Seguradoras: Dados por UF</option>
+		<option value="59">Previd&#234;ncia: Portabilidades Externas</option>
+		<option value="60">Previd&#234;ncia: Quantidades de Participantes</option>
+		<option value="72">Produtos de Acumula&#231;&#227;o: Contribui&#231;&#245;es e Benef&#237;cios</option>
+		<option value="71">Resseguros: Movimenta&#231;&#227;o por Cession&#225;ria Estrangeira</option>
+		<option value="56">Resseguros: Pr&#234;mios Ganhos</option>
+		<option value="57">Resseguros: Sinistros Retidos</option>
+		<option value="54">Seguros: Pr&#234;mios e Sinistros</option>
+		<option value="4">Seguros: Pr&#234;mios e Sinistros ( UF )</option>
+		<option value="53">Seguros: Pr&#234;mios e Sinistros ( UF todas )</option>
+
+	</select>&nbsp;&nbsp;
+                                                       
+                                                       <br /><br /><br /><br />
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                   <td>
+                                                        <font style="font-size: 11pt; font-weight: bold" class="caixaTexto2">Produtos</font>
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                   <td>
+                                                        <select name="ctl00$ContentPlaceHolder1$edSelProd" id="ctl00_ContentPlaceHolder1_edSelProd">
+		<option selected="selected" value="0">Selecione a consulta desejada ...</option>
+		<option value="40">PGBL: Contribui&#231;&#245;es ( UF )</option>
+		<option value="42">PGBL: Contribui&#231;&#245;es ( UF todas )</option>
+		<option value="62">PGBL: Dados por UF</option>
+		<option value="39">PGBL: Provis&#227;o Matem&#225;tica de Benef&#237;cios a Conceder ( Fundos )</option>
+		<option value="44">PGBL: Resgates</option>
+		<option value="45">Previd&#234;ncia Tradicional: Resgates</option>
+		<option value="13">VGBL: Provis&#227;o Matem&#225;tica de Benef&#237;cios a Conceder ( Fundos )</option>
+		<option value="12">VGBL: Resgates</option>
+
+	</select>&nbsp;&nbsp;
+                                                       
+                                                       <br /><br /><br />
+                                                   </td>
+                                               </tr>
+                                            </table>
+	                                     </td>
+                                         <td align="left" width="55%" valign="top">
+                                            <table border="0" cellpadding="5" cellspacing="3" width="100%">
+                                               <tr>
+                                                   <td>
+                                                        <font class="caixaTexto">
+                                                          Informações sobre as consultas:
+                                                        </font><br /><br />
+                                                   </td>
+                                               </tr>
+                                               <tr bgcolor="#EAFFEA">
+                                                   <td align="center" >
+                                                     <div id="ctl00_ContentPlaceHolder1_pnlInfo" class="caixaTexto">
+		
+                                                     Consultas sobre <font style="font-size: 9pt; font-weight: bold">Empresas</font>: Trazem resultados relativos as opera&ccedil;&otilde;es totais das empresas. <br /><br />Consultas sobre <font style="font-size: 9pt; font-weight: bold">Opera&ccedil;&otilde;es</font>: Trazem resultados relativos às opera&ccedil;&otilde;es nos mercados supervisionados, segregados por mercado. <br /><br />Consultas sobre <font style="font-size: 9pt; font-weight: bold">Produtos</font>: Trazem resultados relativos a determinado produto. 
+	</div>
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                   <td align="right">
+                                                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnConsultar" value="Ir para a consulta" id="ctl00_ContentPlaceHolder1_btnConsultar" />
+                                                   </td>
+                                               </tr>
+                                             </table>  
+                                             
+                                             
+                                         </td>
+	                                 </tr>
+	                             </table>
+	                         
+</div>
+	                     </td>
+	                 </tr>
+	                 <tr>
+	                     <td align="left" colspan="3" valign="top">&nbsp; 
+                                   
+                         </td>
+                     </tr>
+	                 <tr>
+	                     <td align="left" colspan="3" valign="top"> 
+                                <font style="font-weight: bold" class="caixaTexto">Forum do SES: </font>
+                         </td>
+                     </tr>
+                     <tr>
+	                     <td align="left" colspan="3" valign="top"> 
+                                <font class="caixaTexto" >
+                                  Para esclarecer dúvidas ou apresentar sugestões participe do 
+                                    <a id="ctl00_ContentPlaceHolder1_HyperLink1" href="Forum/forum.aspx">Forum do SES</a>.
+                                </font><br /><br /><br />
+                         </td>
+                     </tr>
+                     <tr>
+	                     <td align="left" colspan="3" valign="top" class="ed_td"> 
+                                <font style="font-weight: bold" class="caixaTexto">Base do SES para Download: </font>
+                         </td>
+                     </tr>           
+                     <tr>
+	                     <td align="left" colspan="3" valign="top" class="ed_td"> 
+                                <font class="caixaTexto" >
+                                  <div id="GEEST"><a href="https://www2.susep.gov.br/redarq.asp?arq=BaseCompleta%2ezip">Base de Dados do SES, atualizada at&eacute; <span id="ctl00_ContentPlaceHolder1_lblMesAnoCarga">202608</span></a> (gerada em <span id="ctl00_ContentPlaceHolder1_lblDataCarga">19/10/2026 00:45:25</span>)</div>
+                                </font><br />
+                         </td>
+                     </tr>
+					 
+					 <tr>
+	                     <td align="left" colspan="3" valign="top" class="ed_td"> 
+                                <font class="caixaTexto" >
+                                  <div id="GEEST"><a href="download/LISTAEMPRESAS.csv">Lista de empresas processadas nesta base do SES</div>
+                                </font><br />
+                         </td>
+                     </tr>
+
+                     <tr>
+	                     <td align="left" colspan="3" valign="top" class="ed_td"> 
+                                <font class="caixaTexto" >
+                                  <div id="GEEST"><a href="download/Documentacao_das_tabelas.rtf">Documentação das tabelas</div>
+                                </font><br />
+                         </td>
+                     </tr>
+
+                     <tr>
+	                     <td align="left" colspan="3" valign="top" class="ed_td"> 
+<hr />
+
+                         </td>
+                     </tr>           
+
+
+	                 <tr>
+	                     <td align="left" colspan="3" valign="top"> 
+                                <font style="font-weight: bold" class="caixaTexto">Sobre o SES:</font></td>
+                     </tr>
+                     <tr>
+                         <td width="45%" colspan="3" align="left" valign="top" style="text-align: justify">
+                                <font style="text-align: justify;" class="caixaTexto">
+                                    Os dados apresentados foram extraídos diretamente dos 
+                                    Formulários de Informações Periódicas (FIP), enviados à SUSEP pelas companhias 
+                                    seguradoras, resseguradoras, entidades abertas de previdência privada e 
+                                    sociedades de capitalização, em atendimento às normas vigentes, e podem sofrer 
+                                    alteração através de recargas de dados, após análises realizadas pelos setores 
+                                    responsáveis.</font><br /><br />
+                                <font style="text-align: justify;" class="caixaTexto">
+                                    O objetivo deste sistema é fornecer ao público em geral estatísticas dos 
+                                    mercados supervisionados pela SUSEP.</font><br /><br />
+                                <font style="text-align: justify;" class="caixaTexto">
+                                    As consultas on-line e a base completa para download (link acima) são atualizadas semanalmente.
+                                </font><br /><br />
+                               
+                         </td>
+                     </tr>
+
+                     <tr>
+                         <td valign="top" align="left" colspan="3" class="ed_td">
+                              <font class="caixaTexto">
+		                        <p style="text-align: justify;">
+                                    <table border="0" cellpadding="5" cellspacing="0" width="100%" style="border-color:#21be00; border-width:3px; border-style:solid">
+								        <tr>
+                                            <td>
+                                    	        <a href="http://www.susep.gov.br/menuestatistica/SES/relatorios-de-analise-e-acompanhamento-dos-mercados-supervisionados" target="_blank"><img src="minibanner_relat_estat.jpg" width="337" height="127" /></a>
+                                            </td>
+                                	        <td>
+                                                Este relatório é publicado anualmente, tendo como base os dados estatísticos e contábeis encaminhados pelas companhias supervisionadas, e apresenta a evolução histórica de receitas e provisões, cessões em resseguro, índices de sinistralidade, despesas e resultados, concentração por empresa e por grupo econômico, e a distribuição de operações entre os principais segmentos dos mercados de seguros e de produtos de acumulação de recursos.
+                                                <br /><br />
+                                                Para acessar todas as versões, <a href="http://www.susep.gov.br/menuestatistica/SES/relatorios-de-analise-e-acompanhamento-dos-mercados-supervisionados" target="_blank" style="color:blue; text-decoration:underline">clique aqui</a>.
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </p>
+                              </font>                            
+                         </td>
+                     </tr>
+
+                 </table>
+               </td>
+           </tr>
+        </table>
+    </div>
+
+        </form>
+    </div>
+
+    <div id="portal-footer">
+        <span class="susep-rss">
+
+            <a href="http://www.susep.gov.br/rss/RSS"> 
+            <img alt="Rss" src="http://www.susep.gov.br/icon_rss.png">
+            RSS
+            </a>
+        </span>
+        <p>
+        <span class="nome_destaque">SUSEP SEDE</span>, Av. Presidente Vargas, 730, Rio de Janeiro-RJ  <span class="space1">-</span> CEP:20071-900<span class="space2">&nbsp;</span> <span class="nome_destaque">Telefone:(21) 3233-4000</span>
+        </p>
+
+    </div>
+    </div>
+</body>
+</html>
