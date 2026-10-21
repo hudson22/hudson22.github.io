@@ -136,22 +136,20 @@ button, input, select { font: inherit; color: inherit; }
 .layout {
   position: relative;
   z-index: 1;
-  width: min(1240px, 100% - 3rem);
-  margin: 1.8rem auto 3.5rem;
+  width: min(1360px, 100% - 3rem);
+  margin: 1.55rem auto 3.5rem;
   display: grid;
-  grid-template-columns: 272px minmax(0, 1fr);
-  gap: 1.9rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.35rem;
   align-items: start;
 }
 
 /* ------------------------------------------------------------- filtros -- */
 .lateral {
-  position: sticky;
-  top: 1.2rem;
   display: grid;
-  gap: 1.1rem;
-  align-self: start;
-  min-width: 0;
+  grid-template-columns: minmax(360px, 1.55fr) minmax(280px, .9fr);
+  gap: 1rem;
+  align-items: start;
 }
 .lateral__bloco {
   background: var(--branco);
@@ -159,6 +157,7 @@ button, input, select { font: inherit; color: inherit; }
   border-radius: var(--raio);
   padding: 1rem 1rem 1.1rem;
   box-shadow: var(--sombra);
+  min-width: 0;
 }
 .lateral__titulo {
   font-size: .78rem;
@@ -205,7 +204,7 @@ select.entrada {
 
 .caixa-empresas {
   margin-top: .6rem;
-  max-height: 268px;
+  max-height: 220px;
   overflow: auto;
   border: 1px solid var(--linha);
   border-radius: 10px;
@@ -325,13 +324,22 @@ select.entrada {
 .detalhes--tabela { margin-top: 1.4rem; }
 
 /* ---------------------------------------------------------------- abas -- */
-.conteudo { min-width: 0; }
+.conteudo {
+  min-width: 0;
+  display: grid;
+  gap: 1rem;
+}
 .abas {
   display: flex;
   flex-wrap: wrap;
-  gap: .15rem;
-  border-bottom: 1px solid var(--linha);
-  margin-bottom: 1.1rem;
+  gap: .25rem 1rem;
+  margin-bottom: 0;
+  padding: .2rem 1rem 0;
+  background: rgba(255, 255, 255, .78);
+  border: 1px solid rgba(228, 232, 240, .95);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  backdrop-filter: blur(6px);
 }
 .aba {
   border: 0;
@@ -356,7 +364,6 @@ select.entrada {
 
 .painel { animation: subir .42s cubic-bezier(.2, .7, .25, 1) both; }
 .aviso {
-  margin-bottom: 1rem;
   padding: .6rem .8rem;
   border-left: 3px solid var(--magenta);
   background: var(--magenta-lavada);
@@ -567,29 +574,28 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
 }
 
 /* ------------------------------------------------------------ responsivo */
-@media (max-width: 1240px) {
-  .layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-  }
+@media (max-width: 1180px) {
   .lateral {
-    position: static;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
-  .lateral__bloco {
-    min-width: 0;
-  }
   .abas {
     gap: .25rem .9rem;
+    padding-inline: .85rem;
   }
   .aba {
     margin-right: 0;
   }
 }
 
-@media (max-width: 1000px) {
-  .lateral { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 980px) {
+  .layout {
+    width: min(100% - 2rem, 100%);
+    margin-top: 1.2rem;
+  }
+  .lateral {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grade--2 { grid-template-columns: minmax(0, 1fr); }
   .controles {
@@ -600,10 +606,14 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
     min-width: min(100%, 220px);
   }
 }
+
 @media (max-width: 620px) {
   .topo__interno, .layout { width: calc(100% - 2rem); }
   .kpis { grid-template-columns: minmax(0, 1fr); }
-  .aba { margin-right: .9rem; font-size: .84rem; }
+  .abas {
+    padding-inline: .8rem;
+  }
+  .aba { margin-right: 0; font-size: .84rem; }
   .controles {
     padding: .8rem;
   }
