@@ -137,54 +137,71 @@ button, input, select { font: inherit; color: inherit; }
   position: relative;
   z-index: 1;
   width: min(1320px, 100% - 3rem);
-  margin: 1.55rem auto 3.5rem;
+  margin: 1rem auto 3.5rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.35rem;
+  gap: 1rem;
   align-items: start;
 }
 
 /* ------------------------------------------------------------- filtros -- */
 .lateral {
+  position: sticky;
+  top: .85rem;
+  z-index: 6;
   display: grid;
-  grid-template-columns: minmax(320px, 420px) minmax(260px, 340px);
-  gap: 1rem;
-  align-items: start;
-  justify-content: start;
-  max-width: 780px;
+  grid-template-columns: minmax(0, 1.7fr) minmax(320px, 1fr);
+  gap: .9rem;
+  align-items: stretch;
+  max-width: none;
+  padding: .8rem;
+  border: 1px solid rgba(228, 232, 240, .9);
+  border-radius: 18px;
+  background: rgba(247, 248, 250, .86);
+  box-shadow: 0 10px 26px rgba(16, 32, 74, .08);
+  backdrop-filter: blur(10px);
 }
 .lateral__bloco {
-  background: var(--branco);
-  border: 1px solid var(--linha);
-  border-radius: var(--raio);
-  padding: 1rem 1rem 1.1rem;
-  box-shadow: var(--sombra);
+  background: rgba(255, 255, 255, .94);
+  border: 1px solid rgba(228, 232, 240, .95);
+  border-radius: 16px;
+  padding: .85rem .9rem .9rem;
+  box-shadow: 0 4px 14px rgba(16, 32, 74, .05);
   min-width: 0;
 }
+.lateral__bloco--filtros {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+.lateral__bloco--base {
+  display: grid;
+  align-content: start;
+}
 .lateral__titulo {
-  font-size: .78rem;
+  font-size: .74rem;
   text-transform: uppercase;
   letter-spacing: .16em;
   color: var(--azul);
-  margin-bottom: .75rem;
+  margin-bottom: .55rem;
 }
 .rotulo {
   display: block;
-  font-size: .72rem;
+  font-size: .68rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
   color: var(--cinza);
-  margin-bottom: .35rem;
+  margin-bottom: .28rem;
 }
 .entrada {
   width: 100%;
-  padding: .5rem .65rem;
+  padding: .55rem .7rem;
   background: #F2F4F9;
   border: 1px solid transparent;
   border-radius: 10px;
   color: var(--cinza-forte);
-  font-size: .87rem;
+  font-size: .84rem;
   outline: none;
   transition: border-color .15s, background .15s, box-shadow .15s;
 }
@@ -205,8 +222,8 @@ select.entrada {
 }
 
 .caixa-empresas {
-  margin-top: .6rem;
-  max-height: 188px;
+  margin-top: .5rem;
+  max-height: 132px;
   overflow: auto;
   border: 1px solid var(--linha);
   border-radius: 10px;
@@ -221,8 +238,8 @@ select.entrada {
   display: flex;
   align-items: center;
   gap: .6rem;
-  padding: .38rem .7rem;
-  font-size: .82rem;
+  padding: .34rem .65rem;
+  font-size: .79rem;
   cursor: pointer;
   border-bottom: 1px solid #F1F3F8;
 }
@@ -238,7 +255,7 @@ select.entrada {
 }
 .opcao--marcada { background: var(--magenta-lavada); }
 
-.chips { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .6rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .5rem; min-height: 1.5rem; }
 .chip {
   display: inline-flex;
   align-items: center;
@@ -248,7 +265,7 @@ select.entrada {
   background: var(--magenta-lavada);
   border: 1px solid rgba(215, 0, 100, .18);
   border-radius: 999px;
-  font-size: .74rem;
+  font-size: .72rem;
   color: #8E0041;
 }
 .chip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -264,23 +281,29 @@ select.entrada {
 }
 .chip button:hover { color: var(--azul); }
 
-.ajuda { font-size: .75rem; color: #8A93A3; margin-top: .55rem; }
+.ajuda { font-size: .73rem; color: #8A93A3; margin-top: .4rem; }
 .botao {
-  margin-top: .7rem;
-  width: 100%;
-  padding: .45rem .75rem;
+  margin-top: .55rem;
+  width: auto;
+  min-width: 140px;
+  padding: .42rem .72rem;
   border-radius: 10px;
   border: 1px solid var(--linha);
   background: #fff;
   color: var(--azul);
-  font-size: .82rem;
+  font-size: .8rem;
   font-weight: 600;
   cursor: pointer;
   transition: background .15s, border-color .15s;
 }
 .botao:hover { background: var(--azul-lavado); border-color: var(--azul-claro); }
 
-.ficha { display: grid; gap: .32rem; font-size: .82rem; }
+.ficha {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .35rem .8rem;
+  font-size: .8rem;
+}
 .ficha__linha { display: flex; justify-content: space-between; gap: .6rem; }
 .ficha__linha dt { color: #8A93A3; }
 .ficha__linha dd {
@@ -294,7 +317,7 @@ select.entrada {
   display: inline-flex;
   align-items: center;
   gap: .35rem;
-  margin-top: .55rem;
+  margin-top: .45rem;
   padding: .3rem .55rem;
   border-radius: 8px;
   font-size: .74rem;
@@ -303,16 +326,16 @@ select.entrada {
 }
 .selo b { font-family: var(--numeros); }
 .detalhes {
-  margin-top: .85rem;
+  margin-top: .6rem;
   border-top: 1px solid var(--linha);
-  padding-top: .7rem;
-  font-size: .8rem;
+  padding-top: .55rem;
+  font-size: .76rem;
 }
 .detalhes summary {
   cursor: pointer;
   color: var(--azul);
   font-weight: 600;
-  font-size: .8rem;
+  font-size: .76rem;
 }
 .detalhes p { margin-top: .5rem; }
 .detalhes pre {
@@ -329,7 +352,7 @@ select.entrada {
 .conteudo {
   min-width: 0;
   display: grid;
-  gap: 1.1rem;
+  gap: .95rem;
 }
 .abas {
   display: flex;
@@ -584,10 +607,11 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
 /* ------------------------------------------------------------ responsivo */
 @media (max-width: 1180px) {
   .lateral {
-    grid-template-columns: minmax(300px, 1fr) minmax(240px, 300px);
+    top: .6rem;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
-    max-width: 100%;
   }
+  .ficha { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .abas {
     gap: .25rem .9rem;
     padding-inline: .85rem;
@@ -603,9 +627,10 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
     margin-top: 1.2rem;
   }
   .lateral {
-    grid-template-columns: minmax(0, 1fr);
-    max-width: none;
+    position: static;
+    padding: .65rem;
   }
+  .ficha { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grade--2 { grid-template-columns: minmax(0, 1fr); }
   .controles {
@@ -619,6 +644,10 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
 
 @media (max-width: 620px) {
   .topo__interno, .layout { width: calc(100% - 2rem); }
+  .lateral {
+    padding: .5rem;
+  }
+  .ficha { grid-template-columns: minmax(0, 1fr); }
   .kpis { grid-template-columns: minmax(0, 1fr); }
   .abas {
     padding-inline: .8rem;
