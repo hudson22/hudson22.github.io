@@ -45,13 +45,7 @@
     mi: (v) => nf2.format(v / 1e6),
     pct: (v, d = 1) => (v == null || Number.isNaN(v) ? '–' : v.toFixed(d).replace('.', ',') + '%'),
     inteiro: (v) => nf0.format(v),
-    mes: (c) => (c && String(c).length === 6 ? String(c).slice(4, 6) + '/' + String(c).slice(0, 4) : String(c ?? '–')),
-    data: (iso) => {
-      if (!iso) return '–';
-      const d = new Date(iso);
-      return Number.isNaN(d.getTime()) ? iso
-        : d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-    }
+    mes: (c) => (c && String(c).length === 6 ? String(c).slice(4, 6) + '/' + String(c).slice(0, 4) : String(c ?? '–'))
   };
 
   // ---------------------------------------------------------- plotly ----- */
@@ -1130,18 +1124,6 @@
     ];
     document.getElementById('topo-numeros').innerHTML = itens
       .map(([rotulo, valor]) => `<div><dt>${rotulo}</dt><dd>${valor}</dd></div>`).join('');
-
-    const conferencia = meta.conferencia || {};
-    document.getElementById('ficha-base').innerHTML = `
-      <dl class="ficha__linha"><dt>Janela coletada</dt><dd>${fmt.mes(meta.janela_ini)} – ${fmt.mes(meta.janela_fim)}</dd></dl>
-      <dl class="ficha__linha"><dt>Competências</dt><dd>${fmt.inteiro(meta.competencias.length)}</dd></dl>
-      <dl class="ficha__linha"><dt>Empresas</dt><dd>${fmt.inteiro(meta.empresas)}</dd></dl>
-      <dl class="ficha__linha"><dt>Ramos</dt><dd>${fmt.inteiro(meta.ramos)}</dd></dl>
-      <dl class="ficha__linha"><dt>Coletado em</dt><dd>${fmt.data(meta.coletado_em)}</dd></dl>
-      <dl class="ficha__linha"><dt>Reexportado em</dt><dd>${meta.gerado_em || '–'}</dd></dl>
-      ${conferencia.desvio_max_pct != null
-        ? `<p class="selo">Reconciliação empresa × total: desvio máx. <b>${fmt.pct(conferencia.desvio_max_pct, 4)}</b></p>`
-        : ''}`;
 
     document.getElementById('rodape-geracao').textContent =
       `Dados de ${meta.gerado_em || '–'} · ${fmt.inteiro(meta.empresas)} empresas · ${fmt.inteiro(meta.ramos)} ramos · ${fmt.inteiro(meta.competencias.length)} competências.`;

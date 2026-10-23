@@ -33,18 +33,6 @@
       <p class="ajuda" id="ajuda-empresas">Seleção vazia = mercado inteiro.</p>
       <button class="botao botao--fantasma" id="limpar-empresas" type="button" hidden>Limpar seleção</button>
     </div>
-
-    <div class="lateral__bloco lateral__bloco--base">
-      <h2 class="lateral__titulo">Base de dados</h2>
-      <div class="ficha" id="ficha-base"></div>
-      <details class="detalhes">
-        <summary>Como atualizar</summary>
-        <p>Os arquivos <code>dados/*.json</code> deste repositório são gerados pelo pipeline local:</p>
-        <pre><code>python -m src.coleta --ini 202601 --fim atual
-python -m src.exportar_web --destino site/dados</code></pre>
-        <p>Depois é só commitar a pasta <code>dados/</code> atualizada.</p>
-      </details>
-    </div>
   </aside>
 
   <main class="conteudo">

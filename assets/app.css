@@ -128,10 +128,11 @@ button, input, select { font: inherit; color: inherit; }
   top: .85rem;
   z-index: 6;
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(320px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: .9rem;
-  align-items: stretch;
-  max-width: none;
+  align-items: start;
+  justify-self: start;
+  width: min(100%, 720px);
   padding: .8rem;
   border: 1px solid rgba(228, 232, 240, .9);
   border-radius: 18px;
@@ -150,10 +151,6 @@ button, input, select { font: inherit; color: inherit; }
 .lateral__bloco--filtros {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  align-content: start;
-}
-.lateral__bloco--base {
-  display: grid;
   align-content: start;
 }
 .lateral__titulo {
@@ -276,33 +273,6 @@ select.entrada {
 }
 .botao:hover { background: var(--azul-lavado); border-color: var(--azul-claro); }
 
-.ficha {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .35rem .8rem;
-  font-size: .8rem;
-}
-.ficha__linha { display: flex; justify-content: space-between; gap: .6rem; }
-.ficha__linha dt { color: #8A93A3; }
-.ficha__linha dd {
-  margin: 0;
-  font-family: var(--numeros);
-  font-size: .8rem;
-  color: var(--cinza-forte);
-  text-align: right;
-}
-.selo {
-  display: inline-flex;
-  align-items: center;
-  gap: .35rem;
-  margin-top: .45rem;
-  padding: .3rem .55rem;
-  border-radius: 8px;
-  font-size: .74rem;
-  background: var(--azul-lavado);
-  color: var(--azul);
-}
-.selo b { font-family: var(--numeros); }
 .detalhes {
   margin-top: .6rem;
   border-top: 1px solid var(--linha);
@@ -608,10 +578,7 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
 @media (max-width: 1180px) {
   .lateral {
     top: .6rem;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
   }
-  .ficha { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .abas {
     gap: .25rem .9rem;
     padding-inline: .85rem;
@@ -628,9 +595,9 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
   }
   .lateral {
     position: static;
+    width: 100%;
     padding: .65rem;
   }
-  .ficha { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grade--2 { grid-template-columns: minmax(0, 1fr); }
   .controles {
@@ -647,7 +614,6 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
   .lateral {
     padding: .5rem;
   }
-  .ficha { grid-template-columns: minmax(0, 1fr); }
   .kpis { grid-template-columns: minmax(0, 1fr); }
   .abas {
     padding-inline: .8rem;
