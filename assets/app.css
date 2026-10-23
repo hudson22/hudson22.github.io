@@ -102,7 +102,11 @@ button, input, select { font: inherit; color: inherit; }
   font-size: clamp(1.35rem, 2.4vw, 1.95rem);
   font-weight: 600;
   margin-top: .85rem;
-  max-width: 22ch;
+  text-wrap: pretty;
+}
+.topo__titulo-secundario {
+  font-weight: 400;
+  color: rgba(255, 255, 255, .72);
 }
 .topo__fonte {
   margin-top: .55rem;
