@@ -109,28 +109,6 @@ button, input, select { font: inherit; color: inherit; }
   font-size: .82rem;
   color: rgba(255, 255, 255, .75);
 }
-.topo__numeros {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .45rem 2.2rem;
-  margin: 1.15rem 0 0;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, .16);
-}
-.topo__numeros div { display: flex; flex-direction: column; gap: .1rem; }
-.topo__numeros dt {
-  font-size: .64rem;
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  color: rgba(255, 255, 255, .62);
-}
-.topo__numeros dd {
-  margin: 0;
-  font-family: var(--numeros);
-  font-size: .95rem;
-  font-weight: 500;
-  color: #fff;
-}
 
 /* -------------------------------------------------------------- layout -- */
 .layout {
@@ -584,6 +562,28 @@ table.dados caption { caption-side: top; text-align: left; padding: .6rem .7rem;
   color: #8A93A3;
   display: grid;
   gap: .2rem;
+}
+.rodape__numeros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 2.2rem;
+  margin: 0 0 .9rem;
+  padding-bottom: .9rem;
+  border-bottom: 1px solid var(--linha);
+}
+.rodape__numeros div { display: flex; flex-direction: column; gap: .1rem; }
+.rodape__numeros dt {
+  font-size: .64rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: #8A93A3;
+}
+.rodape__numeros dd {
+  margin: 0;
+  font-family: var(--numeros);
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--azul);
 }
 
 /* -------------------------------------------------------------- scroll -- */
