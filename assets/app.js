@@ -223,6 +223,15 @@
     return linhas.filter((l) => ativo.has(String(l.competencia)));
   }
 
+  /** Rótulo do recorte temporal vigente. O cruzamento empresa × ramo vem acumulado. */
+  function rotuloPeriodo(acumulado) {
+    const ativo = acumulado ? D.competencias : periodoAtivo();
+    if (!ativo.length) return 'sem competências';
+    return ativo.length === 1
+      ? fmt.mes(ativo[0])
+      : `${fmt.mes(ativo[0])} a ${fmt.mes(ativo[ativo.length - 1])} (${ativo.length} meses)`;
+  }
+
   function atualizarAjudaPeriodo() {
     const meses = periodoAtivo().length;
     const quantidade = meses === 1 ? '1 competência' : `${meses} competências`;
@@ -445,8 +454,7 @@
       return;
     }
 
-    document.getElementById('t-ramos-mix').textContent =
-      `Top ${n} ramos em ${fmt.mes(selecionadas[selecionadas.length - 1])}${selecionadas.length > 1 ? ' (acumulado ' + selecionadas.length + ' meses)' : ''}`;
+    document.getElementById('t-ramos-mix').textContent = `Top ${n} ramos · ${rotuloPeriodo(fonte.cruzamento)}`;
     definirTituloGrafico('g-ramos-dispersao', 'Sinistralidade × porte do ramo');
     definirTituloGrafico('g-ramos-sinistralidade', 'Ramos com maior sinistralidade');
 
@@ -524,7 +532,7 @@
       { chave: 'sin_calc', rotulo: 'Sinistralidade', tipo: 'pct', classe: (v) => classeSinistralidade(v) }
     ];
     pintarTabela('tabela-ramos', colunas, base,
-      `${fmt.inteiro(base.length)} ramos · ${fmt.mes(selecionadas[0])}${selecionadas.length > 1 ? '–' + fmt.mes(selecionadas[selecionadas.length - 1]) : ''}`);
+      `${fmt.inteiro(base.length)} ramos · ${rotuloPeriodo(fonte.cruzamento)}`);
   }
 
   // -------------------------------------------------------------- aba 2 -- */
