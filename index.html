@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prêmios e Sinistros · Mercado de Seguros — SUSEP/SES</title>
-<meta name="description" content="Painel estático de prêmios, sinistros, sinistralidade, concentração de mercado e resseguro do mercado brasileiro de seguros, a partir do relatório Premios e Sinistros (id=54) da SUSEP/SES.">
+<meta name="description" content="Painel estático de prêmios, sinistros, sinistralidade, concentração de mercado e resseguro do mercado brasileiro de seguros">
 <meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 
 <header class="topo">
   <div class="topo__interno">
-    <p class="marca"><span class="marca__sigla">CNP</span><span class="marca__nome">Seguradora</span></p>
+    <p class="marca"><span class="marca__sigla">CNP</span><span class="marca__nome">Seguradoras</span></p>
     <h1 class="topo__titulo">Prêmios e Sinistros &mdash; Mercado de Seguros</h1>
     <p class="topo__fonte" id="topo-fonte">Fonte: SUSEP / SES &middot; relatório Prêmios e Sinistros (id=54)</p>
   </div>
@@ -31,6 +31,14 @@
     <div class="chips" id="chips-empresas"></div>
     <p class="ajuda" id="ajuda-empresas">Seleção vazia = mercado inteiro.</p>
     <button class="botao botao--fantasma" id="limpar-empresas" type="button" hidden>Limpar seleção</button>
+    <div class="divisor"></div>
+    <span class="rotulo">Período</span>
+    <div class="periodo">
+      <select class="entrada" id="periodo-ini" aria-label="Competência inicial"></select>
+      <span class="periodo__ate">até</span>
+      <select class="entrada" id="periodo-fim" aria-label="Competência final"></select>
+    </div>
+    <p class="ajuda" id="ajuda-periodo"></p>
   </aside>
 
   <main class="conteudo">
@@ -46,10 +54,6 @@
     <!-- 1. ramos -->
     <section class="painel" id="painel-ramos" role="tabpanel" aria-labelledby="aba-ramos">
       <div class="controles">
-        <div class="controle">
-          <label class="rotulo" for="comp-ramos">Competência</label>
-          <select class="entrada" id="comp-ramos"></select>
-        </div>
         <div class="controle controle--largo">
           <label class="rotulo" for="top-ramos">Ramos no gráfico: <output id="top-ramos-saida">15</output></label>
           <input class="faixa" id="top-ramos" type="range" min="5" max="30" value="15" step="1">
@@ -102,10 +106,6 @@
         <div class="controle" id="controle-ramo-ranking" hidden>
           <label class="rotulo" for="ramo-ranking">Ramo</label>
           <select class="entrada" id="ramo-ranking"></select>
-        </div>
-        <div class="controle">
-          <label class="rotulo" for="comp-ranking">Competência</label>
-          <select class="entrada" id="comp-ranking"></select>
         </div>
         <div class="controle controle--largo">
           <label class="rotulo" for="top-ranking">Empresas no gráfico: <output id="top-ranking-saida">15</output></label>
@@ -170,13 +170,6 @@
 
     <!-- 4. estrutura -->
     <section class="painel" id="painel-estrutura" role="tabpanel" aria-labelledby="aba-estrutura" hidden>
-      <div class="controles">
-        <div class="controle">
-          <label class="rotulo" for="comp-estrutura">Competência</label>
-          <select class="entrada" id="comp-estrutura"></select>
-        </div>
-      </div>
-
       <div class="kpis">
         <article class="kpi"><p class="kpi__rotulo">Prêmio ganho</p><p class="kpi__valor" id="k-est-premio">–</p></article>
         <article class="kpi"><p class="kpi__rotulo">Despesa com resseguro</p><p class="kpi__valor" id="k-est-despesa">–</p></article>

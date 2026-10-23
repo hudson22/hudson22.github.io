@@ -100,9 +100,8 @@
     ramoRanking: null,
     topRamos: 15,
     topRanking: 15,
-    compRamos: 'acumulado',
-    compRanking: 'acumulado',
-    compEstrutura: 'acumulado'
+    periodoIni: null,
+    periodoFim: null
   };
 
   let D = null;
@@ -202,11 +201,6 @@
     return estado.empresas.size ? filtrarEmpresas(D.empresaMes) : D.ramoMes;
   }
 
-  function recortar(linhas, competencias) {
-    const conjunto = new Set(competencias);
-    return linhas.filter((l) => conjunto.has(String(l.competencia)));
-  }
-
   function definirTituloGrafico(id, texto) {
     const alvo = document.getElementById(id);
     const titulo = alvo && alvo.previousElementSibling;
@@ -215,21 +209,54 @@
     }
   }
 
-  // --------------------------------------------------- seletor de mês ---- */
-  function preencherCompetencia(id, competencias, valorAtual) {
-    const select = document.getElementById(id);
-    const opcoes = ['acumulado'].concat(competencias);
-    const padrao = competencias.length > 1 ? 'acumulado' : competencias[0];
-    const escolhido = opcoes.includes(valorAtual) ? valorAtual : padrao;
-    select.innerHTML = opcoes
-      .map((valor) => `<option value="${valor}">${valor === 'acumulado' ? 'Acumulado do período' : fmt.mes(valor)}</option>`)
-      .join('');
-    select.value = escolhido;
-    return escolhido;
+  // ------------------------------------------------- filtro de período -- */
+  const janelaInteira = () =>
+    estado.periodoIni === D.competencias[0] && estado.periodoFim === D.competencias[D.competencias.length - 1];
+
+  const periodoAtivo = () =>
+    D.competencias.filter((competencia) => competencia >= estado.periodoIni && competencia <= estado.periodoFim);
+
+  /** Recorta qualquer tabela mensal na janela escolhida na lateral. */
+  function recortarPeriodo(linhas) {
+    const ativo = new Set(periodoAtivo());
+    if (ativo.size === D.competencias.length) return linhas;
+    return linhas.filter((l) => ativo.has(String(l.competencia)));
   }
 
-  const competenciasSelecionadas = (escolhido, competencias) =>
-    escolhido === 'acumulado' ? competencias : [escolhido];
+  function atualizarAjudaPeriodo() {
+    const meses = periodoAtivo().length;
+    const quantidade = meses === 1 ? '1 competência' : `${meses} competências`;
+    document.getElementById('ajuda-periodo').textContent = janelaInteira()
+      ? `Janela completa da base: ${quantidade}.`
+      : `${fmt.mes(estado.periodoIni)} a ${fmt.mes(estado.periodoFim)} · ${quantidade}.`;
+  }
+
+  function preencherPeriodo() {
+    const todas = D.competencias;
+    if (!todas.length) return;
+    if (!todas.includes(estado.periodoIni)) estado.periodoIni = todas[0];
+    if (!todas.includes(estado.periodoFim)) estado.periodoFim = todas[todas.length - 1];
+    const opcoes = todas.map((competencia) => `<option value="${competencia}">${fmt.mes(competencia)}</option>`).join('');
+    for (const id of ['periodo-ini', 'periodo-fim']) {
+      const select = document.getElementById(id);
+      select.innerHTML = opcoes;
+      select.value = id === 'periodo-ini' ? estado.periodoIni : estado.periodoFim;
+    }
+    atualizarAjudaPeriodo();
+  }
+
+  function ajustarPeriodo(evento) {
+    const inicial = document.getElementById('periodo-ini');
+    const final = document.getElementById('periodo-fim');
+    if (inicial.value > final.value) {
+      if (evento.target === inicial) final.value = inicial.value;
+      else inicial.value = final.value;
+    }
+    estado.periodoIni = inicial.value;
+    estado.periodoFim = final.value;
+    atualizarAjudaPeriodo();
+    renderAtiva();
+  }
 
   // ------------------------------------------------------------ tabelas -- */
   function formatarCelula(valor, coluna) {
@@ -280,9 +307,12 @@
       aviso.hidden = true;
       return;
     }
-    const texto = estado.aba === 'ranking'
+    let texto = estado.aba === 'ranking'
       ? `Filtro de empresa ativo: ${total} empresa(s) selecionada(s). HHI, CR4 e CR8 são calculados sobre o próprio recorte, e não sobre o mercado inteiro.`
       : `Filtro de empresa ativo: ${total} empresa(s) selecionada(s). Os indicadores por ramo vêm do cruzamento empresa × ramo e cobrem apenas os ramos coletados nesse escopo.`;
+    if ((estado.aba === 'ramos' || estado.aba === 'estrutura') && !janelaInteira()) {
+      texto += ' Esse cruzamento é acumulado em toda a janela coletada, então o filtro de período não altera os valores por ramo.';
+    }
     aviso.textContent = texto;
     aviso.hidden = false;
   }
@@ -294,10 +324,9 @@
       vazio('g-ramos-mix', 'Sem dados de ramo para este recorte.');
       return;
     }
-    const competencias = competenciasDe(fonte.linhas);
-    estado.compRamos = preencherCompetencia('comp-ramos', competencias, estado.compRamos);
-    const selecionadas = competenciasSelecionadas(estado.compRamos, competencias);
-    const linhasRecorte = recortar(fonte.linhas, selecionadas);
+    // O cruzamento empresa × ramo vem acumulado na janela inteira, então não
+    // responde ao filtro de período.
+    const linhasRecorte = fonte.cruzamento ? fonte.linhas : recortarPeriodo(fonte.linhas);
     const compararEmpresas = fonte.cruzamento && estado.empresas.size > 1;
     const base = comSinistralidade(porRamo(linhasRecorte))
       .sort((a, b) => b.premio_direto - a.premio_direto);
@@ -528,15 +557,14 @@
       linhas = filtrarEmpresas(D.empresaMes);
     }
 
-    const competencias = competenciasDe(linhas);
-    if (!competencias.length) {
+    if (!linhas.length) {
       vazio('g-rank-empresas', 'Sem dados para o recorte selecionado.');
       return;
     }
-    estado.compRanking = preencherCompetencia('comp-ranking', competencias, estado.compRanking);
-    const selecionadas = competenciasSelecionadas(estado.compRanking, competencias);
+    // No escopo por ramo a fonte é o cruzamento acumulado da janela inteira.
+    const linhasRecorte = porRamoEscopo ? linhas : recortarPeriodo(linhas);
 
-    const base = comSinistralidade(porEmpresa(recortar(linhas, selecionadas)))
+    const base = comSinistralidade(porEmpresa(linhasRecorte))
       .filter((l) => l.premio_direto > 0)
       .sort((a, b) => b.premio_direto - a.premio_direto);
     if (!base.length) {
@@ -622,7 +650,7 @@
 
   // -------------------------------------------------------------- aba 3 -- */
   function renderEvolucao() {
-    const fonte = fonteMensal();
+    const fonte = recortarPeriodo(fonteMensal());
     if (!fonte.length) {
       vazio('g-evolucao', 'Sem dados para a evolução temporal neste recorte.');
       return;
@@ -852,11 +880,7 @@
       vazio('g-resseguro', 'Sem dados neste recorte. Verifique o filtro de empresa.');
       return;
     }
-    const competencias = competenciasDe(fonte.linhas);
-    estado.compEstrutura = preencherCompetencia('comp-estrutura', competencias, estado.compEstrutura);
-    const selecionadas = competenciasSelecionadas(estado.compEstrutura, competencias);
-
-    const base = porRamo(recortar(fonte.linhas, selecionadas));
+    const base = porRamo(fonte.cruzamento ? fonte.linhas : recortarPeriodo(fonte.linhas));
     const somar = (metrica) => base.reduce((s, l) => s + Number(l[metrica] || 0), 0);
     const premioGanho = somar('premio_ganho');
     const despesa = somar('despesa_resseguro');
@@ -1067,18 +1091,8 @@
       });
     });
 
-    document.getElementById('comp-ramos').addEventListener('change', (evento) => {
-      estado.compRamos = evento.target.value;
-      renderRamos();
-    });
-    document.getElementById('comp-ranking').addEventListener('change', (evento) => {
-      estado.compRanking = evento.target.value;
-      renderRanking();
-    });
-    document.getElementById('comp-estrutura').addEventListener('change', (evento) => {
-      estado.compEstrutura = evento.target.value;
-      renderEstrutura();
-    });
+    document.getElementById('periodo-ini').addEventListener('change', ajustarPeriodo);
+    document.getElementById('periodo-fim').addEventListener('change', ajustarPeriodo);
     document.getElementById('ramo-ranking').addEventListener('change', (evento) => {
       estado.ramoRanking = evento.target.value;
       renderRanking();
@@ -1149,8 +1163,12 @@
       };
       D.dimEmpresa.forEach((e) => D.empresas.set(e.codigo_empresa, e.nome_empresa));
       D.dimRamo.forEach((r) => D.ramos.set(r.codigo_ramo, r.nome_ramo));
+      D.competencias = (meta.competencias && meta.competencias.length
+        ? meta.competencias.map(String)
+        : competenciasDe(D.ramoMes)).slice().sort();
 
       renderCabecalho();
+      preencherPeriodo();
       renderListaEmpresas();
       renderChips();
       ligarFiltros();

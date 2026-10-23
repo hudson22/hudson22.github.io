@@ -243,6 +243,25 @@ select.entrada {
 .chip button:hover { color: var(--azul); }
 
 .ajuda { font-size: .73rem; color: #8A93A3; margin-top: .4rem; }
+
+/* filtro de período */
+.divisor {
+  height: 1px;
+  background: var(--linha);
+  margin: .75rem 0 .6rem;
+}
+.periodo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: .4rem;
+}
+.periodo__ate {
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #8A93A3;
+}
 .botao {
   margin-top: .55rem;
   width: auto;
