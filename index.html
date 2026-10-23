@@ -23,16 +23,14 @@
 
 <div class="layout">
 
-  <aside class="lateral">
-    <div class="lateral__bloco lateral__bloco--filtros">
-      <h2 class="lateral__titulo">Filtros</h2>
-      <label class="rotulo" for="busca-empresa">Filtrar por empresa</label>
-      <input id="busca-empresa" class="entrada" type="search" placeholder="Nome ou código SUSEP" autocomplete="off">
-      <div class="caixa-empresas" id="lista-empresas" role="group" aria-label="Empresas"></div>
-      <div class="chips" id="chips-empresas"></div>
-      <p class="ajuda" id="ajuda-empresas">Seleção vazia = mercado inteiro.</p>
-      <button class="botao botao--fantasma" id="limpar-empresas" type="button" hidden>Limpar seleção</button>
-    </div>
+  <aside class="lateral" aria-label="Filtros do painel">
+    <h2 class="lateral__titulo">Filtros</h2>
+    <label class="rotulo" for="busca-empresa">Filtrar por empresa</label>
+    <input id="busca-empresa" class="entrada" type="search" placeholder="Nome ou código SUSEP" autocomplete="off">
+    <div class="caixa-empresas" id="lista-empresas" role="group" aria-label="Empresas"></div>
+    <div class="chips" id="chips-empresas"></div>
+    <p class="ajuda" id="ajuda-empresas">Seleção vazia = mercado inteiro.</p>
+    <button class="botao botao--fantasma" id="limpar-empresas" type="button" hidden>Limpar seleção</button>
   </aside>
 
   <main class="conteudo">
